@@ -14,6 +14,7 @@ int test1()
 		y += 0.1f;
 		y -= 0.1f;
 	}
+	printf("y = %f\n", y);
 	return 0;
 }
 
@@ -29,6 +30,7 @@ int test2()
 		y += 0;
 		y -= 0;
 	}
+	printf("y = %f\n", y);
 	return 0;
 }
 
