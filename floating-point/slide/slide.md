@@ -60,7 +60,7 @@ irrational numbers? [1](https://www.zhihu.com/question/364786025)
 
 ---
 # 浮点数格式 II
-* 一个普通的浮点数由如下3个部分来描述：
+* 一个普通的浮点数由以下3个部分来描述：
   * s = 符号位(sign)，0或1。
   * c = 有效数字或尾数(significand/coefficient/mantissa)，以基数b的形式来书写，最多p位数字。 
   * q = 指数值(exponent)，满足条件emin ≤ q + p − 1 ≤ emax。
@@ -70,7 +70,7 @@ irrational numbers? [1](https://www.zhihu.com/question/364786025)
 # 浮点数格式 III
 举例：设b=10, p=7, emax=96, 因此emin=−95。
 * 尾数部分满足0 ≤ c ≤ 9999999，指数部分满足−101 ≤ q ≤ 90。 
-* 可表示的最小非0正数为：1×10^−101，最大数为：9999999×10^90。
+* 可表示的最小非0正数为：1×10^−101，最大数为：9999999×10^90 (9.999999×10^96)，因此其最大表示范围是：−9.999999×10^96至9.999999×10^96。
 * 量级上最小的规格化浮点数是-1x10^-95和1x10^-95; 其它位于两数之间的非0数被称为非规则浮点数(subnormal numbers)。
 * 存在两个0，+0和-0。
 
@@ -84,14 +84,20 @@ irrational numbers? [1](https://www.zhihu.com/question/364786025)
 # 表示和编码方式
 * 一个数可能有多种指数化表示方式。例如b=10及p=7，则−12.345可以表示为−12345×10^−3,−123450×10^−4,−1234500×10^−5。
 * 对于decimal formats，所有表示都是有效的，标准中定义了在存在多种表示时选择哪一个的规则。
-* 对于binary formats, 标准要求使用exponent值最小的那种表示。此外，exponent并非直接表示，而是要加上一个**bias**使得最小可表示的exponent为1，从而用0值来表示subnormal numbers。
-* binary formats要求对数进行**规格化**处理，也就是调整exponent使得significant的leading bit为1。对于这些规格化好的数，其尾数的leading bit无需实际存储，从而可以多出1 bit来提高精度。
+* 对于binary formats, 标准要求使用exponent值最小的那种表示。此外，exponent并非直接表示，而是要加上一个**bias**使得最小可表示的exponent为1，从而保留出0值来表示subnormal numbers。
+* 标准要求对数进行**规格化**处理，也就是调整exponent使得significant的leading digit不为0。对于binary normal numbers，其尾数的leading bit无需实际存储，从而可以多出1 bit来提高精度。
 
 ---
 # Basic and interchange formats
 标准定义了5种基本格式(basic formats)：binary32, binary64, binary128, decimal64, decimal128。
 
 ![h:250](basic_formats.png) 
+
+---
+# 支持非binary base浮点数的计算机
+In 1964, IBM introduced **hexadecimal** floating-point representations in its System/360 mainframes; these same representations are still available for use in modern z/Architecture systems. However, in 1998, IBM included IEEE-compatible **binary** floating-point arithmetic to its mainframes; in 2005, IBM also added IEEE-compatible **decimal** floating-point arithmetic.
+
+POWER6, POWER7, and POWER8 CPUs that implement IEEE 754-2008 **decimal** arithmetic fully in **hardware**.
 
 ---
 # Layout
@@ -251,12 +257,12 @@ binary64，双精度浮点数，对应C中的double。
 
 ---
 # 量化(quantization)
-* 将浮点数（FP32）转换为16位/8位(/4位/2位/1位)整数，并基于后者来进行存储/计算。
+* 将浮点数（一般指FP32）转换为16位/8位(/4位/2位/1位)整数，并基于后者来进行存储/计算。
 * Pros:
-  - 降低带宽(bandwidth)和存储(storage)需求
-  - 提升计算速度
+  - 降低带宽(bandwidth)和存储(storage)需求。
+  - 提升计算速度。
 * Cons:
-  - 可能损失精度
+  - 可能损失精度。
 
 ---
 # 量化实现方法
