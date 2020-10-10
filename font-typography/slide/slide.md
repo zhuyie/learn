@@ -159,7 +159,7 @@ Part 3. 字体的应用
 
 ---
 # Text justification (cont.)
-* 即使是英文要达到好的效果也并不简单。
+* 即使是英文要达到好的效果也并不容易。
 ![height:520px](justification_4.jpg)
 
 ---
@@ -356,7 +356,7 @@ If the format is 1.0 or 3.0, the table ends here. There are additional entries f
 * 某些语言需要复杂的Glyph相对位置控制，TrueType中的kerning机制（仅水平方向位移）无法满足需求。
 ![width:600px](opentype_table_gpos_1.png)
 ![width:600px](opentype_table_gpos_2.png)
-* GPOS表的格式相当复杂，一般需要用独立的库（例如[HarfBuzz](https://harfbuzz.github.io/)）来处理。QT也是在较后的版本中才支持GPOS。
+* 格式相当复杂。
 
 ---
 # Web Open Font Format
