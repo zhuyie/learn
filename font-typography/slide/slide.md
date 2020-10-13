@@ -410,7 +410,7 @@ If the format is 1.0 or 3.0, the table ends here. There are additional entries f
   * OpenType: glyph index represent as a 16-bit integer.
 * 当检测到当前所选字体不支持需显示字符的语言时，自动切换或回落到一个预定义的能支持该语言的字体，这种机制称为[Font fallback](https://docs.microsoft.com/en-us/globalization/input/font-technology#font-fallback)。
 * 举例：GUI界面上有个文本输入框，设置为Tahoma字体。用户可能输入英语，中文，泰语...
-* 主流OS一般都有支持，如果应用程序自己处理字体渲染，则需要自行考虑font ballback。
+* 主流OS一般都有支持，如果应用程序自己处理字体渲染，则需要自行考虑font fallback。
 
 ---
 # Font linking
