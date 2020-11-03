@@ -2,35 +2,31 @@
 #include <string.h>
 #include <fenv.h>
 
+const int LOOP_COUNT = 100000000;
+
 int test1()
 {
-	float x = 1.1;
-	float z = 1.123;
-	float y = x;
-	for (int j = 0; j < 90000000; j++)
+	float x = 1.0f;
+	for (int i = 0; i < LOOP_COUNT; i++)
 	{
-		y *= x;
-		y /= z;
-		y += 0.1f;
-		y -= 0.1f;
+		x /= 1.1f;
+		x += 0.1f;
+		x -= 0.1f;
 	}
-	printf("y = %f\n", y);
+	printf("x = %f\n", x);
 	return 0;
 }
 
 int test2()
 {
-	float x = 1.1;
-	float z = 1.123;
-	float y = x;
-	for (int j = 0; j < 90000000; j++)
+	float x = 1.0f;
+	for (int i = 0; i < LOOP_COUNT; i++)
 	{
-		y *= x;
-		y /= z;
-		y += 0;
-		y -= 0;
+		x /= 1.1f;
+		x += 0;
+		x -= 0;
 	}
-	printf("y = %f\n", y);
+	printf("x = %f\n", x);
 	return 0;
 }
 
