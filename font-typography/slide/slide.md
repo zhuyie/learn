@@ -139,6 +139,11 @@ Part 3. 字体的应用
 * 通过将这个Glyph分解为上面一个点和下面的一个点，可以缓解组合爆炸问题。
 
 ---
+# Ligatures
+* Two or more graphemes or letters are joined as a single glyph.
+![](ligatures.png)
+
+---
 # Kerning
 * Font kerning是指调整相邻Glyph之间的相对距离，以改进显示效果的机制。
 ![height:150px](kerning_1.png)
@@ -374,6 +379,18 @@ If the format is 1.0 or 3.0, the table ends here. There are additional entries f
 ---
 <!-- _class: lead -->
 # Part 3. 字体的应用
+
+---
+# 字体和排版学API
+* Windows
+  * DirectWrite atop Direct2D or GDI
+  * Uniscribe
+  * Legacy GDI
+* Linux
+  * Cairo = path rendering, including text
+  * FontConfig = to locate font resources
+  * FreeType 2 = font loading, font rasterizer
+  * Pango = text layout, script processing
 
 ---
 # 简单的文本渲染流程
