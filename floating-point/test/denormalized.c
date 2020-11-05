@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <fenv.h>
 
 const int LOOP_COUNT = 100000000;
@@ -32,17 +33,27 @@ int test2()
 
 int main(int argc, char* argv[])
 {
-	if (argc >= 2 && strcmp(argv[1], "2") == 0)
+	int mode = -1;
+	if (argc > 1)
+		mode = atoi(argv[1]);
+
+	if (mode == 1)
+	{
+		test1();
+	}
+	else if (mode == 2)
 	{
 		test2();
 	}
-	else if (argc >= 2 && strcmp(argv[1], "3") == 0)
+	else if (mode == 3)
 	{
 		fesetenv(FE_DFL_DISABLE_SSE_DENORMS_ENV);
 		test2();
 	}
 	else
 	{
-		test1();
+		printf("invalid mode\n");
 	}
+
+	return 0;
 }

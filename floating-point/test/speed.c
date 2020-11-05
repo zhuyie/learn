@@ -32,15 +32,24 @@ void test2()
 
 int main(int argc, char* argv[])
 {
-    if (argc > 1 && strcmp(argv[1], "float") == 0)
+    const char* mode = "";
+    if (argc > 1)
+        mode = argv[1];
+
+    if (strcmp(mode, "int") == 0)
+    {
+        test1();
+        printf("%d\n", g_int);
+    }
+    else if (strcmp(mode, "float") == 0)
     {
         test2();
         printf("%f\n", g_float);
     }
     else
     {
-        test1();
-        printf("%d\n", g_int);
+        printf("invalid mode\n");
     }
+
     return 0;
 }
