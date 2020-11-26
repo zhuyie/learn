@@ -42,18 +42,21 @@ zhuyie@gmail.com
 * 单个10进制数字有10种状态，可以用4个2进制bit来完整表示。
 * 我们常见的计算机都采用8个bit组成1个字节，因此BCD一般采用packed形式，即用1个字节表示2个10进制数字。![](packed_bcd.png)
 * 优点：能精确表示0.1这种binary fraction无法精确表示的数。
+  * binary fraction无法精确表示所有分母不为2的幂次方的分数，例如```0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9```。
 * 缺点：存储密度较低，实现数学运算的电路复杂度较高。
 
 ---
 # Scientific notation
-![width:500px](scientific_notation.png)
-![width:300px](scientific_notation_2.png)
+* 科学计数法由尾数、底数和指数三部分组成：
+  ![width:500px](scientific_notation.png)
+* 一些例子：
+  ![width:250px](scientific_notation_2.png)
 
 ---
 # Normalized scientific notation
 * 350 can be written as ```3.5×10^2``` or ```35×10^1``` or ```350×10^0```.
 * 其中significand部分```大于0且小于base```的那种形式，被称为normalized形式。就上例而言，是```3.5x10^2```。
-* 得到normalized形式表示的方法是调整exponent。
+* 得到normalized形式表示的方法是调整exponent值。
 
 ---
 # Fixed point notation
@@ -69,36 +72,35 @@ zhuyie@gmail.com
 
 ---
 # Floating point notation
-* 地球到太阳的距离（量级）：10^11 m
-* 原子间的距离（量级）：10^-10 m
-* 当描述这两类距离时，显然应该有不同的**精度**要求。具体而言：数值量级越大，精度要求可以较低，而数值量级越小时，精度要求会越高。
+* 地球到太阳的距离(量级):```10^11m```; 原子间的距离(量级):```10^-10m```;
+* 当描述这两类距离时，显然应该有不同的**精度**要求。具体而言：数值量级越大时，精度要求可以较低，而数值量级越小时，精度要求会越高。
 * 那能否有一种数据格式，既能表示较大的**数值范围**，也能在数值量级较小时提供很高的**精度**呢？
   * **浮点数**就是这种数据格式。
-  * 采用了**科学计数法**的思路。
+  * 采用了**科学计数法**的思路，需要通过exponent值来确定小数点的**实际位置**，因此而得名。
 
 ---
 # IEEE 754 标准简介
 * 由Institute of Electrical and Electronics Engineers (IEEE)在1985年初次发布，2008年和2019年有两次版本修订。
 * 标准定义了：
-  * arithmetic formats
-  * interchange formats
-  * rounding rules
-  * operations
-  * exception handling
+  - arithmetic formats
+  - interchange formats
+  - rounding rules
+  - operations
+  - exception handling
 
 ---
 # 浮点数格式
-存在多种浮点数格式。某种浮点数格式由以下3个参数来定义：
-* 基数(base or radix) b，在IEEE 754中有两种取值，2或者10。
-* 精度(precision) p。
-* 指数(exponent)范围：emin to emax, with emin = 1 − emax for all IEEE 754 formats.
+* 存在多种浮点数格式。某种浮点数格式由以下3个参数来定义：
+  - 基数(base or radix) b，在IEEE 754中有两种取值，2或者10。
+  - 精度(precision) p。
+  - 指数(exponent)范围：emin to emax, with emin = 1 − emax for all IEEE 754 formats.
 
 ---
 # 浮点数格式 (cont.)
 * 一个浮点数由以下三部分组成：
-  * s = 符号位(sign)，0或1。
-  * c = 有效数字或尾数(significand/coefficient/mantissa)，以基数b的形式来书写，最多p位数字。 
-  * q = 指数值(exponent)，满足条件emin ≤ q + p − 1 ≤ emax。
+  - s = 符号位(sign)，0或1。
+  - c = 有效数字或尾数(significand/coefficient/mantissa)，以基数b的形式来书写，最多p位数字。 
+  - q = 指数值(exponent)，满足条件emin ≤ q + p − 1 ≤ emax。
 * 其值为：![](finite_numbers.png)
 * 逻辑上就是一种科学计数法表示。
 
@@ -114,6 +116,7 @@ zhuyie@gmail.com
 # 浮点数格式 (cont. 3)
 * 使用一个单独的符号位来表示正数还是负数。
   * 存在两个0，```+0```和```-0```。
+    * +0和-0相等吗？
   * 现代二进制计算机中的有符号整数，通过使用补码(Two's complement)的方式，避免了两个0的问题。
 
 ---
@@ -160,11 +163,11 @@ binary64，双精度浮点数，对应C中的double。
 # 舍入规则
 * 当significant的位数大于最大精度位数时，就需要进行舍入操作(Rounding)。
 * IEEE 754定义了5种Rounding规则，分别是：
-  * Round to nearest, ties to even (**default** for binary floating point)
-  * Round to nearest, ties away from zero
-  * Round toward 0 (also known as truncation)
-  * Round toward +∞ (also known as ceiling)
-  * Round toward −∞ (also known as floor)
+  - Round to nearest, ties to even (**default** for binary floating point)
+  - Round to nearest, ties away from zero
+  - Round toward 0 (also known as truncation)
+  - Round toward +∞ (also known as ceiling)
+  - Round toward −∞ (also known as floor)
 
 ---
 # 舍入规则 (cont.)
