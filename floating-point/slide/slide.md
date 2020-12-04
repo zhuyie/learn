@@ -55,7 +55,7 @@ zhuyie@gmail.com
 ---
 # Normalized scientific notation
 * 350 can be written as ```3.5×10^2``` or ```35×10^1``` or ```350×10^0```.
-* 其中significand部分```大于0且小于base```的那种形式，被称为normalized形式。就上例而言，是```3.5x10^2```。
+* 其中significand部分```大于等于1且小于base```的那种形式，被称为normalized形式。就上例而言，是```3.5x10^2```。
 * 得到normalized形式表示的方法是调整exponent值。
 
 ---
