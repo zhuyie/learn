@@ -47,18 +47,18 @@ zhuyie@gmail.com
 ---
 # ASCII
 * **A**merican **S**tandard **C**ode for **I**nformation **I**nterchange
-* 初版发布于1963年，已经标准化为[ISO/IEC 646](https://en.wikipedia.org/wiki/ISO/IEC_646)。
+* 初版发布于1963年，已经被标准化为[ISO/IEC 646](https://en.wikipedia.org/wiki/ISO/IEC_646)。
 * ![h:300](ascii.png)
 
 ---
 # ISO 8859-1
-* [ISO 2022](https://en.wikipedia.org/wiki/ISO/IEC_2022)在保持对ASCII兼容的基础上，设计出支持多字节字符集(MBCS)的架构。GB2312编码也符合此框架。
-* [ISO 8859](https://en.wikipedia.org/wiki/ISO/IEC_8859)是基于ISO 2022的架构，保持对ISO 646兼容的同时在G1区定义出16套扩展字符。其中ISO 8859-1用于支持西欧语言。
+* [ISO 2022](https://en.wikipedia.org/wiki/ISO/IEC_2022)在维持对ASCII兼容的基础上，设计出支持多字节字符集(MBCS)的架构。GB2312编码也符合此框架。
+* [ISO 8859](https://en.wikipedia.org/wiki/ISO/IEC_8859)兼容于ASCII，是基于ISO 2022的架构在G1区定义出16套扩展字符而形成的字符集。其中ISO 8859-1用于支持西欧语言。
 ![h:300](iso-8859-1.png)
 
 ---
 # Windows CP1252
-* 操作系统厂商例如Microsoft/IBM都会设计自己的字符集。Microsoft在ISO 8859-1的基础上又增加了27个符号，定义出Code Page 1252。
+* 操作系统厂商例如Microsoft/IBM都会设计自己的字符集。Microsoft在ISO 8859-1的基础上又增加了27个符号，定义出[Code Page 1252](https://en.wikipedia.org/wiki/Windows-1252)。
 ![h:300](windows-1252.png)
 
 ---
@@ -68,6 +68,15 @@ zhuyie@gmail.com
 * GB2312字符串通常使用符合ISO 2022架构的[EUC-CN](https://en.wikipedia.org/wiki/Extended_Unix_Code#EUC-CN)方式存储。每个汉字采用2个字节表示，将码点的“区”值加上160得到高字节，“位”值加上160得到低字节。
 * GBK和GB18030是对GB2312字符集的扩展标准。
 * [Windows CP936](https://en.wikipedia.org/wiki/Code_page_936_(Microsoft_Windows))能支持绝大多数的GBK字符。
+
+---
+# Charset detection
+* 由于存在着数十上百种字符集，也不存在统一的标识机制，很多时候需要使用字符集检测技术。
+* 并不是一个非常简单的流程。Mozilla有一篇这个领域里面比较有名的[论文](https://www-archive.mozilla.org/projects/intl/universalcharsetdetection)，组合使用了三类方法：
+  - Coding scheme method
+  - Character Distribution
+  - 2-Char Sequence Distribution
+* 参考[uchardet](https://github.com/BYVoid/uchardet/)。
 
 ---
 # What is Unicode?
@@ -154,6 +163,7 @@ zhuyie@gmail.com
 # UTF-8 (cont.)
 * 首字节高位为0时，表明此code point用1个字节表示。
 * 首字节高位为1时，有几个连续的1就说明此code point用几个连续字节来表示。
+* 后继字节高2位为10，并带有6-bit的有效数据。
 * ![h:250](utf-8.png)
 
 ---
@@ -189,7 +199,7 @@ zhuyie@gmail.com
 # Precomposed characters
 * 但是为了**向后兼容**，Unicode也包括了一堆已经预先组合好的字符，直接分配了码点。
 ![h:300](precomposed.png)
-* 感觉刚才这一堆聪明事都白做了...
+* 一脸懵，感觉刚才这一堆聪明事都白做了...
 
 ---
 # Unicode equivalence
@@ -267,7 +277,7 @@ zhuyie@gmail.com
 
 ---
 # BIDI (cont.)
-* 在细化到具体文字的方向之前，首先需要确定**基础书写方向(Base Direction)**。
+* 在细化到具体文字的方向之前，首先需要确定**基础书写方向(Base Direction)**，或者说上下文方向。
 * Base Direction = LTR
 ![h:100](bidi-3.gif)
 * Base Direction = RTL
@@ -291,7 +301,7 @@ zhuyie@gmail.com
 # BIDI (cont. 4)
 * 数字通常是弱类型的字符，其方向性是确定的。
 ![h:120](bidi-9.gif)
-* 某些字符根据当前的文字方向具有镜像的显示效果，例如下图中的尖括号（在两行中使用的都是完全相同的字符）。
+* 某些字符根据当前的文字方向具有**镜像**的显示效果，例如下图中的尖括号（在两行中使用的都是完全相同的字符）。
 ![h:120](bidi-10.png)
 
 ---
