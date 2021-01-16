@@ -146,7 +146,7 @@ zhuyie@gmail.com
 # Combining character sequence
 * 某些文字中会用到变音符号，例如：Café, Jalapeño, TÜV
 * ![h:300](diacritical-marks-1.png) → ![h:150](diacritical-marks-2.png)
-* Unicode中包含一类被称为"combining marks"的字符，它们可以与基(base)字符进行组合。例如得到一个带变音符号的拉丁字母。
+* Unicode包含一类被称为"combining marks"的字符，它们可以与基字符(base character)进行组合。例如得到一个带变音符号的拉丁字母。
 
 ---
 # CCS (cont.)
@@ -213,13 +213,13 @@ zhuyie@gmail.com
   * X-variants: 语义上不同的字符，例如：Latin capital A (U+0041 A) and the Greek capital alpha (U+0391 Α)。
   * Y-variants: 语义上相同但**外观差异明显**的字符，例如：U+732B **猫** 和 U+8C93 **貓**。
   * Z-variants: 语义上相同且**外观差异细微**的字符，例如：U+8358 **荘** 和 U+838A **莊**，U+8AAC **説** 和 U+8AAA **說**。
-* Z-variants理论上应该被统一，但基于兼容性等因素而独立分配了码点（从某旧字符编码字符串转换为Unicode再转回来应该无损）。
+* Z-variants理论上应该被统一，但基于兼容性等因素而独立分配了码点（从某旧字符编码字符串转换为Unicode再转回来，尽量无损）。
 
 ---
 # CJK Unified Ideographs (cont. 2)
 * 虽然存在基础原则，在实践中某些字符是否要统一，仍然受到各种复杂因素的影响。
 * 某些被统一了码点的字符，在不同语言的书写习惯上仍可能不同。例如U+8FD4:
-![h:100](han-difference.svg)
+![h:150](han-difference.svg)
 * 使得无法简单的基于code point来选择字体，必须再附加上locale上下文。增加了text stack的实现复杂度（例如font fallback时）。
 
 ---
@@ -230,6 +230,56 @@ zhuyie@gmail.com
 * Block **CJK Unified Ideographs Extension B** (20000–2A6DF) contains 42,718 characters.
 * ...
 * Block **CJK Unified Ideographs Extension G** (30000-3134F) contains 4,939 characters.
+
+---
+# BIDI
+* BIDI是Unicode Bidirectional Algorithm的简称。
+* 不同的文字有不同的书写方向，通常为LTR和RTL。
+![h:150](bidi-1.gif)
+* 当具有不同书写方向的文字混合在一行时，就需要引入bidi算法。
+![h:80](bidi-2.gif)
+* 与此同时，底层字符串中的存储顺序并不理解文字方向。
+
+---
+# BIDI (cont.)
+* 在细化到具体文字的方向之前，首先需要确定**基础书写方向(Base Direction)**。
+* Base Direction = LTR
+![h:100](bidi-3.gif)
+* Base Direction = RTL
+![h:100](bidi-4.gif)
+
+---
+# BIDI (cont. 2)
+* 每一个Unicode字符都被赋予了一个方向性属性。
+![h:300](bidi-5.png)
+
+---
+# BIDI (cont. 3)
+* 位于两个强类型字符之间的中性字符(例如空格)，将**跟随**强类型字符的方向性。
+![h:100](bidi-6.gif)
+* 若某个中性字符，位于两个方向**相反**的强字符之间呢？这时候受基础方向（上下文）控制。
+![h:80](bidi-7.png)
+![h:80](bidi-8.png)
+
+---
+# BIDI (cont. 4)
+* 数字通常是弱类型的字符，其方向性是确定的。
+![](bidi-9.gif)
+* 某些字符根据当前的文字方向具有镜像的显示效果，例如下图中的尖括号（在两行中使用的都是完全相同的字符）。
+![](bidi-10.png)
+
+---
+# BIDI (cont. 5)
+* 某些场景需要显式的进行方向控制，因此Unicode设计了Explicit Markers字符：
+![](bidi-11.png)
+* OVERRIDE类的Marker可以强制改变文字方向：
+![](bidi-12.png)
+
+---
+# BIDI (cont. 6)
+* BIDI在光标移动、文字块选时也有非常多的逻辑要处理。
+* 参考[UAX #9](https://unicode.org/reports/tr9/)
+* Use library, eg. ICU, [GNU FriBidi](https://github.com/fribidi/fribidi).
 
 ---
 # Ideographic Description Sequence
