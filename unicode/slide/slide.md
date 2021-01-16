@@ -15,7 +15,7 @@ zhuyie@gmail.com
 - A Brief History of Unicode
 - The Unicode Code Space & Encodings
 - Combining Character Sequence & Normalization
-- Han Unification
+- CJK Unified Ideographs
 - BIDI
 
 ---
@@ -200,6 +200,36 @@ zhuyie@gmail.com
 * 如前所述，在Unicode中一个**用户所感知的字符**可能有多种底层表示方式。我们将这样的"字符"称为"Grapheme Cluster"，其具体定义见[UAX #29](http://www.unicode.org/reports/tr29/)。
 * 显而易见，在文本编辑领域需要细致的处理，以确保光标的位置以及选中区域的边界，能正确的落在grapheme cluster boundary上。
 * 另一种情况是字符串超过长度限制需要进行截断处理时（例如数据库字段限制最多xx字节）。首先需要在code point边界上进行截断（例如不能在UTF-8的多个字节序列中，否则会导致非法字符串），然后需要考虑grapheme cluster边界以免改变字符逻辑含义。
+
+---
+# CJK Unified Ideographs
+* 东亚文字多为表意文字，通常字符个数众多，且历史悠久，存在各种文化变迁与融合。
+* 以汉字为例，就存在于简体中文、繁体中文、日文、韩文和越南文中。相互之间存在交集，但并不相同。
+* Unicode一开始基于2字节Code space来设计，最大支持65536个码点，其中的20940(～32%)被保留给CJK文字。这些空间明显不能支持全部的CJK字符，因此通过[Han unification](https://en.wikipedia.org/wiki/Han_unification)将CJK中的交集部分尽可能统一化，以减少总的字符个数。
+
+---
+# CJK Unified Ideographs (cont.)
+* Unicode为CJK文字分配码点的[3轴哲学](https://en.wikipedia.org/wiki/Z-variant)：
+  * X-variants: 语义上不同的字符，例如：Latin capital A (U+0041 A) and the Greek capital alpha (U+0391 Α)。
+  * Y-variants: 语义上相同但**外观差异明显**的字符，例如：U+732B **猫** 和 U+8C93 **貓**。
+  * Z-variants: 语义上相同且**外观差异细微**的字符，例如：U+8358 **荘** 和 U+838A **莊**，U+8AAC **説** 和 U+8AAA **說**。
+* Z-variants理论上应该被统一，但基于兼容性等因素而独立分配了码点（从某旧字符编码字符串转换为Unicode再转回来应该无损）。
+
+---
+# CJK Unified Ideographs (cont. 2)
+* 虽然存在基础原则，在实践中某些字符是否要统一，仍然受到各种复杂因素的影响。
+* 某些被统一了码点的字符，在不同语言的书写习惯上仍可能不同。例如U+8FD4:
+![h:100](han-difference.svg)
+* 使得无法简单的基于code point来选择字体，必须再附加上locale上下文。增加了text stack的实现复杂度（例如font fallback时）。
+
+---
+# CJK Unified Ideographs (cont. 3)
+* Unicode 13.0中定义了92,856个CJK统一表意字符。
+* Block **CJK Unified Ideographs** (4E00–9FFF) contains 20,989 basic Chinese characters.
+* Block **CJK Unified Ideographs Extension A** (3400–4DBF) contains 6,592 additional characters.
+* Block **CJK Unified Ideographs Extension B** (20000–2A6DF) contains 42,718 characters.
+* ...
+* Block **CJK Unified Ideographs Extension G** (30000-3134F) contains 4,939 characters.
 
 ---
 # Ideographic Description Sequence
