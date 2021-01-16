@@ -43,7 +43,32 @@ zhuyie@gmail.com
 # Terminology (cont. 3)
 * A **grapheme/grapheme cluster** is a sequence of one or more code points that are displayed as a single, graphical unit that a reader recognizes as a single element of the writing system. For example, both **a** and **ä** are graphemes, but they may consist of multiple code points.
 * A **glyph** is an image, usually stored in a font (which is a collection of glyphs), used to represent graphemes or parts thereof.
- 
+
+---
+# ASCII
+* **A**merican **S**tandard **C**ode for **I**nformation **I**nterchange
+* 初版发布于1963年，已经标准化为[ISO/IEC 646](https://en.wikipedia.org/wiki/ISO/IEC_646)。
+* ![h:300](ascii.png)
+
+---
+# ISO 8859-1
+* [ISO 2022](https://en.wikipedia.org/wiki/ISO/IEC_2022)在保持对ASCII兼容的基础上，设计出支持多字节字符集(MBCS)的架构。GB2312编码也符合此框架。
+* [ISO 8859](https://en.wikipedia.org/wiki/ISO/IEC_8859)是基于ISO 2022的架构，保持对ISO 646兼容的同时在G1区定义出16套扩展字符。其中ISO 8859-1用于支持西欧语言。
+![h:300](iso-8859-1.png)
+
+---
+# Windows CP1252
+* 操作系统厂商例如Microsoft/IBM都会设计自己的字符集。Microsoft在ISO 8859-1的基础上又增加了27个符号，定义出Code Page 1252。
+![h:300](windows-1252.png)
+
+---
+# GB2312/GBK/GB18030
+* [GB2312](https://zh.wikipedia.org/wiki/GB_2312)由中国国家标准总局于1980年发布，共收录6763个汉字。
+* GB2312对所收录汉字进行了“分区”处理，每区含有94个汉字／符号，共计94个区，因此也称为“区位码”。
+* GB2312字符串通常使用符合ISO 2022架构的[EUC-CN](https://en.wikipedia.org/wiki/Extended_Unix_Code#EUC-CN)方式存储。每个汉字采用2个字节表示，将码点的“区”值加上160得到高字节，“位”值加上160得到低字节。
+* GBK和GB18030是对GB2312字符集的扩展标准。
+* [Windows CP936](https://en.wikipedia.org/wiki/Code_page_936_(Microsoft_Windows))能支持绝大多数的GBK字符。
+
 ---
 # What is Unicode?
 [Unicode](https://en.wikipedia.org/wiki/Unicode) is an information technology (IT) **standard for the consistent encoding, representation, and handling of text expressed** in most of the world's writing systems. The standard is maintained by the **Unicode Consortium**, and as of March 2020, there is a total of 143,859 characters, with Unicode 13.0 covering 154 modern and historic scripts, as well as multiple symbol sets and emoji. The character repertoire of the Unicode Standard is **synchronized with ISO/IEC 10646**, and both are code-for-code identical.
@@ -256,17 +281,18 @@ zhuyie@gmail.com
 ---
 # BIDI (cont. 3)
 * 位于两个强类型字符之间的中性字符(例如空格)，将**跟随**强类型字符的方向性。
-![h:100](bidi-6.gif)
+![h:70](bidi-6.gif)
 * 若某个中性字符，位于两个方向**相反**的强字符之间呢？这时候受基础方向（上下文）控制。
-![h:80](bidi-7.png)
-![h:80](bidi-8.png)
+![h:70](bidi-7.png)
+* 有些时候的效果不是我们想要的：
+![h:70](bidi-8.png)
 
 ---
 # BIDI (cont. 4)
 * 数字通常是弱类型的字符，其方向性是确定的。
-![](bidi-9.gif)
+![h:120](bidi-9.gif)
 * 某些字符根据当前的文字方向具有镜像的显示效果，例如下图中的尖括号（在两行中使用的都是完全相同的字符）。
-![](bidi-10.png)
+![h:120](bidi-10.png)
 
 ---
 # BIDI (cont. 5)
@@ -279,7 +305,7 @@ zhuyie@gmail.com
 # BIDI (cont. 6)
 * BIDI在光标移动、文字块选时也有非常多的逻辑要处理。
 * 参考[UAX #9](https://unicode.org/reports/tr9/)
-* Use library, eg. ICU, [GNU FriBidi](https://github.com/fribidi/fribidi).
+* Use library, eg. [ICU](http://site.icu-project.org/home), [GNU FriBidi](https://github.com/fribidi/fribidi).
 
 ---
 # Ideographic Description Sequence
