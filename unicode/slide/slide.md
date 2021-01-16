@@ -205,7 +205,7 @@ zhuyie@gmail.com
 # Ideographic Description Sequence
 * 表意文字由部首和笔划组成。Unicode定义了一类用来描述部首组合形式的字符(Ideographic Description Char)，例如：⿰, ⿱, ⿴。
 * 基于IDS数据库可以得到某个表意文字的**表意组字序列**。
-* ![h:350](ids.jpg)
+* ![h:350](ids.png)
 
 ---
 # Emoji diversity
