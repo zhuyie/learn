@@ -10,6 +10,16 @@ zhuyie
 zhuyie@gmail.com
 
 ---
+# Agenda
+- Legacy Charsets
+- A Brief History of Unicode
+- The Unicode Code Space & Encodings
+- Combining Character Sequence & Normalization
+- Han Unification
+- BIDI
+
+---
+<!-- paginate: true -->
 # Terminology
 * A **character** is a minimal unit of text that has semantic value.
 * A **character set** is a collection of characters that might be used by multiple languages. Example: The Latin character set is used by English and most European languages.
@@ -35,7 +45,6 @@ zhuyie@gmail.com
 * A **glyph** is an image, usually stored in a font (which is a collection of glyphs), used to represent graphemes or parts thereof.
  
 ---
-<!-- paginate: true -->
 # What is Unicode?
 [Unicode](https://en.wikipedia.org/wiki/Unicode) is an information technology (IT) **standard for the consistent encoding, representation, and handling of text expressed** in most of the world's writing systems. The standard is maintained by the **Unicode Consortium**, and as of March 2020, there is a total of 143,859 characters, with Unicode 13.0 covering 154 modern and historic scripts, as well as multiple symbol sets and emoji. The character repertoire of the Unicode Standard is **synchronized with ISO/IEC 10646**, and both are code-for-code identical.
 
@@ -183,7 +192,26 @@ zhuyie@gmail.com
 ---
 # Normalization Forms (cont. 3)
 * The [Unicode Normalization Algorithm](https://unicode.org/reports/tr15/#Description_Norm) is fairly complex.
-* ![h:400](normalization-forms-5.png)
+* Use library, eg. [ICU](http://site.icu-project.org/home)
+* ![h:350](normalization-forms-5.png)
+
+---
+# Grapheme Clusters
+* 如前所述，在Unicode中一个**用户所感知的字符**可能有多种底层表示方式。我们将这样的"字符"称为"Grapheme Cluster"，其具体定义见[UAX #29](http://www.unicode.org/reports/tr29/)。
+* 显而易见，在文本编辑领域需要细致的处理，以确保光标的位置以及选中区域的边界，能正确的落在grapheme cluster boundary上。
+* 另一种情况是字符串超过长度限制需要进行截断处理时（例如数据库字段限制最多xx字节）。首先需要在code point边界上进行截断（例如不能在UTF-8的多个字节序列中，否则会导致非法字符串），然后需要考虑grapheme cluster边界以免改变字符逻辑含义。
+
+---
+# Ideographic Description Sequence
+* 表意文字由部首和笔划组成。Unicode定义了一类用来描述部首组合形式的字符(Ideographic Description Char)，例如：⿰, ⿱, ⿴。
+* 基于IDS数据库可以得到某个表意文字的**表意组字序列**。
+* ![h:350](ids.jpg)
+
+---
+# Emoji diversity
+* Unicode Emoji的技术方案相当复杂，具体参考[UTS #51](http://www.unicode.org/reports/tr51/index.html)。
+* 举个例子，Emoji中包括很多"头像"，需要在技术方案上考虑肤色多样性。
+* ![h:300](emoji-diversity.png)
 
 ---
 # Some interesting unicode characters
