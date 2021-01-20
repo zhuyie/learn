@@ -10,6 +10,11 @@ zhuyie
 zhuyie@gmail.com
 
 ---
+![h:300](unicode-versions.png)
+![h:80](faq-on-faqs.png)
+![h:200](IUC44.jpg)
+
+---
 # Agenda
 - Legacy Charsets
 - A Brief History of Unicode
@@ -227,7 +232,7 @@ zhuyie@gmail.com
 ---
 # Normalization Forms (cont. 3)
 * The [Unicode Normalization Algorithm](https://unicode.org/reports/tr15/#Description_Norm) is fairly complex.
-* Use library, eg. [ICU](http://site.icu-project.org/home)
+* Use library, e.g. [ICU](http://site.icu-project.org/home)
 * ![h:350](normalization-forms-5.png)
 
 ---
@@ -315,7 +320,7 @@ zhuyie@gmail.com
 # BIDI (cont. 6)
 * BIDI在光标移动、文字块选时也有非常多的逻辑要处理。
 * 参考[UAX #9](https://unicode.org/reports/tr9/)
-* Use library, eg. [ICU](http://site.icu-project.org/home), [GNU FriBidi](https://github.com/fribidi/fribidi).
+* Use library, e.g. [ICU](http://site.icu-project.org/home), [GNU FriBidi](https://github.com/fribidi/fribidi).
 
 ---
 # Ideographic Description Sequence
