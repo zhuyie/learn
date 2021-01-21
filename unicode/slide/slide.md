@@ -156,7 +156,7 @@ zhuyie@gmail.com
 ---
 # UTF-16 (cont. 2)
 * 一个surrogate pair分为high和low两个部分，其二进制形式为110110**xxxxxxxxxx** 110111**yyyyyyyyyy**
-* 已知码点的最大值为U+10FFFF。给定一个值大于U+FFFF的码点，将其值减去0x10000，结果的范围是[0, 0xFFFFF]，也即可以用**20个bit**来表示。将这20个bit分为高低两个10bit的部分，分别代入上面的xxxxxxxxxx和yyyyyyyyyy中，就得到了对应的surrogate。
+* 已知Unicode码点的范围是[0, 0x10FFFF]。给定一个值大于U+FFFF的码点，将其值减去0x10000，结果的范围是[0, 0xFFFFF]，也即可以用**20个bit**来表示。将这20个bit分为高低两个10bit的部分，分别代入上面的xxxxxxxxxx和yyyyyyyyyy中，就得到了对应的surrogate。
 
 ---
 # UTF-8
@@ -250,7 +250,7 @@ zhuyie@gmail.com
 ---
 # CJK Unified Ideographs (cont.)
 * Unicode为CJK文字分配码点的[3轴哲学](https://en.wikipedia.org/wiki/Z-variant)：
-  * X-variants: 语义上不同的字符，例如：Latin capital A (U+0041 A) and the Greek capital alpha (U+0391 Α)。
+  * X-variants: 语义上不同的字符，例如：U+6C49 **汉** 和 U+5B57 **字**。
   * Y-variants: 语义上相同但**外观差异明显**的字符，例如：U+732B **猫** 和 U+8C93 **貓**。
   * Z-variants: 语义上相同且**外观差异细微**的字符，例如：U+8358 **荘** 和 U+838A **莊**，U+8AAC **説** 和 U+8AAA **說**。
 * Z-variants理论上应该被统一，但基于兼容性等因素而独立分配了码点（从某旧字符编码字符串转换为Unicode再转回来，尽量无损）。
