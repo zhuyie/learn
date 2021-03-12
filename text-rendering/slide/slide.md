@@ -82,6 +82,12 @@ References:
 
 ---
 # SDF
+* Clearly, our SDF only use a finite number of discrete points, and therefore **not exact**.
+* To be able to render more complex shapes such as decorative fonts we need to use a higher SDF resolution.
+![h:250](sdf-10.png)
+
+---
+# SDF
 * By convention, we map the signed distance into the range 0..1, with **0** representing the maximum possible negative distance and **1.0** representing the maximum possible positive distance. hence, **0.5** is generally used for the **alpha threshold value**.
 * A simple SDF renderer (OpenGL fragment shader):
 ![h:250](sdf-9.png)
