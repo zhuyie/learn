@@ -46,6 +46,12 @@ after:
 
 ---
 # Hinting
+[CFF2 CharString Hinting operators](https://docs.microsoft.com/en-us/typography/opentype/spec/cff2charstr#43-hint-operators)
+
+![h:300](hinting-5.png) ![h:200](hinting-6.png) ![h:300](hinting-7.png)
+
+---
+# Hinting
 References:
 [Font hinting - Wikipedia](https://en.wikipedia.org/wiki/Font_hinting)
 [TrueType hinting](https://docs.microsoft.com/en-us/typography/truetype/hinting)
