@@ -14,6 +14,36 @@ zhuyie@gmail.com
 
 ---
 <!-- paginate: true -->
+
+---
+# Naïve path renderer
+(1) Load the glyph.
+(2) Build a **path** object by calling FT_Outline_Decompose.
+(3) Draw the filled path object. 
+
+![h:300](path-renderer-4.png)![h:180](path-renderer-1.jpg)
+
+---
+# Naïve path renderer
+![h:500](path-renderer-2.jpg)
+
+---
+# Naïve path renderer
+![h:500](path-renderer-3.jpg)
+
+---
+# Naïve path renderer
+* Pros
+  * simple.
+  * font size independent.
+* Cons
+  * display quality is not very good.
+  * drawing lots of paths is slow.
+
+---
+# Bitmap renderer
+
+---
 # Hinting
 * Glyphs displayed on a **low-resolution** surface will often show numerous **unpleasant artifacts**:
   * stem widths and heights are not consistent, even in a single character image.
