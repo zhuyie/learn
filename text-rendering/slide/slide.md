@@ -93,6 +93,23 @@ NotoSerifSC-Regular.otf
 
 ---
 # Bitmap renderer
+* Although the glyph describe in **vector** form, most display devices are **raster** devices. there are always a rasterization stage.
+* One glyph may displayed many instances at the same time. Use a pre-rasterized glyph and bitblt multiples times usually more efficient.
+* With exact pixel boundary, we can do font hinting to improve the display quality at low screen resolutions.
+* Therefore, the most common way to render glyphs is using pre-rasterized glyphs. We can call it "bitmap renderer".
+
+---
+# Bitmap renderer
+- A toy bitmap renderer:
+  * Set font size (FT_Set_Char_Size/FT_Set_Pixel_Sizes).
+  * Load the glyph (FT_Load_Char/FT_Load_Glyph).
+  * Convert the given glyph image to a bitmap (FT_Render_Glyph). The default render mode renders an anti-aliased coverage bitmap with 256 gray levels (also called a **pixmap**).
+  * Build a corresponding **bitmap** from the pixmap.
+  * Draw the bitmap.
+
+---
+# Bitmap renderer
+![h:500](bitmap-renderer-1.png)
 
 ---
 # Hinting

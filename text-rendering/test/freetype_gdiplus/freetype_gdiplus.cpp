@@ -214,9 +214,12 @@ static void DrawCharPath(Graphics& graphics, const Color& color, const PointF& p
     graphics.FillPath(&brush, &context.path);
 }
 
-static void DrawCharImage(Graphics& graphics, const Color& color, const PointF& pt, char c)
+static void DrawCharBitmap(Graphics& graphics, const Color& color, const PointF& pt, char c)
 {
-    int error = FT_Load_Char(ftFace, c, FT_LOAD_RENDER);
+    int error = FT_Load_Char(ftFace, c, FT_LOAD_DEFAULT);
+    if (error) { /* TODO */ }
+    
+    error = FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_NORMAL);
     if (error) { /* TODO */ }
 
     const FT_Bitmap* glyphBitmap = &ftFace->glyph->bitmap;
@@ -253,6 +256,6 @@ VOID OnPaint(HDC hdc)
     DrawCharPath(graphics, color, PointF(120.0f, 240.0f), 'B');
     graphics.SetSmoothingMode(SmoothingModeDefault);
 
-    DrawCharImage(graphics, color, PointF(20.0f, 360.0f), 'A');
-    DrawCharImage(graphics, color, PointF(120.0f, 360.0f), 'B');
+    DrawCharBitmap(graphics, color, PointF(20.0f, 360.0f), 'A');
+    DrawCharBitmap(graphics, color, PointF(120.0f, 360.0f), 'B');
 }
