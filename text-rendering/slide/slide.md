@@ -11,9 +11,43 @@ zhuyie@gmail.com
 
 ---
 # Agenda
+- Font basics
+- Naïve path renderer
+- Bitmap renderer
+- Hinting
+- Glyph texture atlas
+- SDF renderer
 
 ---
 <!-- paginate: true -->
+# Font types
+* A font is a collection of glyphs.
+* **Bitmap** fonts consist of a matrix of dots or pixels representing the image of each glyph in each face and size.
+* **Vector** fonts (outline fonts) use Bézier curves, drawing instructions and mathematical formulae to describe each glyph, which make the character outlines scalable to any size.
+  - TrueType uses quadratic bezier curves.
+  - OpenType(CFF) uses cubic bezier curves.
+
+---
+# Glyph internals
+Roboto-Black.ttf
+![h:450](glyph-internals-1.png)
+
+---
+# Glyph internals
+NotoSerifSC-Regular.otf
+![h:450](glyph-internals-2.png)
+
+---
+# EM & font size
+* In digital type, the **EM square** is a grid of arbitrary resolution that is used as the design space of a digital font.
+* A 2D coordinate system, which have an **origin** and a **unit length**.
+* All points in glyph description are based on this coordinate system.
+
+---
+# EM & font size
+* Different fonts may have different EM size, eg. 1000 or 2048.
+* 2 inches **font size** means 1 EM is 2 inches large.
+* The most common used font size unit is **point**, which is 1/72 inch.
 
 ---
 # Naïve path renderer
@@ -21,7 +55,24 @@ zhuyie@gmail.com
 (2) Build a **path** object by calling FT_Outline_Decompose.
 (3) Draw the filled path object. 
 
-![h:300](path-renderer-4.png)![h:180](path-renderer-1.jpg)
+![h:320](path-renderer-4.png)
+
+---
+# Naïve path renderer
+![h:500](path-renderer-5.png)
+
+---
+# Naïve path renderer
+![h:500](path-renderer-6.png)
+
+---
+# Naïve path renderer
+![h:280](path-renderer-7.png)
+
+---
+# Naïve path renderer
+![h:200](path-renderer-8.png)
+![h:200](path-renderer-1.jpg)
 
 ---
 # Naïve path renderer
@@ -34,11 +85,11 @@ zhuyie@gmail.com
 ---
 # Naïve path renderer
 * Pros
-  * simple.
-  * font size independent.
+  - simple.
+  - font size independent.
 * Cons
-  * display quality is not very good.
-  * drawing lots of paths is slow.
+  - display quality is not very good.
+  - drawing lots of paths is slow.
 
 ---
 # Bitmap renderer
