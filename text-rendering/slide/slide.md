@@ -167,6 +167,10 @@ Code snippets from [OpenGL Text Rendering](https://learnopengl.com/In-Practice/T
 
 ---
 # Bitmap renderer
+![h:500](bitmap-renderer-6.png)
+
+---
+# Bitmap renderer
 * Pros
   - good display quality.
   - pretty fast.
