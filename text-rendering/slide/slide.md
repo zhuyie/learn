@@ -16,6 +16,7 @@ zhuyie@gmail.com
 - Bitmap renderer (texture renderer)
 - Hinting
 - SDF renderer
+- New GPU-based approaches
 
 ---
 <!-- paginate: true -->
@@ -116,7 +117,13 @@ NotoSerifSC-Regular.otf
 
 ---
 # Bitmap renderer
-![h:500](path-renderer-3.jpg)
+![h:500](path-renderer-3.jpg) ![h:500](bitmap-renderer-7.png)
+
+---
+# Bitmap renderer
+[Scanline rendering - Wikipedia](https://en.wikipedia.org/wiki/Scanline_rendering)
+[How FreeType's rasterizer work](https://gitlab.freedesktop.org/freetype/freetype/-/blob/master/docs/raster.txt)
+[FreeType's new 'perfect' anti-aliasing renderer](https://gitlab.freedesktop.org/freetype/freetype/-/blob/master/src/smooth/ftgrays.c)
 
 ---
 # Bitmap renderer
@@ -288,6 +295,30 @@ References:
 [Drawing Text with Signed Distance Fields in Mapbox GL](https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817)
 [Multi-channel signed distance field generator](https://github.com/Chlumsky/msdfgen)
 [FreeType Merges New "SDF" Renderer](https://www.phoronix.com/scan.php?page=news_item&px=FreeType-SDF-Renderer-Lands)
+
+---
+# Loop Blinn Curve Rendering
+C. Loop, J. Blinn, ["Resolution Independent Curve Rendering using Programmable Graphics Hardware"](https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/p1000-loop.pdf)
+![h:400](gpu-renderer-1.png)
+
+---
+# Loop Blinn Curve Rendering
+- The triangulation step is quite complicated and for complicated glyphs the triangle count could reach large numbers for each glyph.
+- At small sizes when several of the outline curve segments intersect a pixel, the pixel shader will only use one of them to determine the color.
+- Anti-aliasing requires additional triangles to be added to the outside of the glyph mesh or the use of super sampling.
+
+---
+# Slug Algorithm
+E. Lengyel, ["GPU-Centered Font Rendering Directly from Glyph Outlines"](http://terathon.com/i3d2018_lengyel.pdf)
+![h:400](gpu-renderer-2.png) ![h:400](gpu-renderer-3.png)
+
+---
+# Slug Algorithm
+- For a closed curve in a 2D plane, the **winding number** for a point p is the number of times the curve loops clockwise around the point.
+- In general, a glyph shape can be **sampled** at any point by determining the winding number.
+- One way to compute the winding number of a point p is to shoot a ray in any direction, originating from p.
+- Then a non-zero winding number indicates that the point is inside the glyph shape, otherwise it is outside.
+- Many times **slower** than the pixmap texture based methods.
 
 ---
 <!-- _class: lead -->
