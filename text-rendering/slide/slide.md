@@ -2,8 +2,13 @@
 marp: true
 theme: gaia
 backgroundColor: #fff
-backgroundImage: url('https://marp.app/assets/hero-background.jpg')
 ---
+<style>
+section {
+  font-family: 'Avenir Next', 'Avenir', 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+</style>
+
 <!-- _class: lead -->
 # Text Rendering
 zhuyie
