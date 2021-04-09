@@ -18,7 +18,9 @@ zhuyie@gmail.com
 # Agenda
 - A demo program
 - What is GPU/GPGPU?
-- Understanding GPU
+- GPGPU Programming
+- The difference between CPU and GPU
+- Closer look at real GPU designs
 
 ---
 <!-- paginate: true -->
@@ -46,26 +48,81 @@ zhuyie@gmail.com
 
 ---
 # What is GPU?
+- A [graphics processing unit (GPU)](https://en.wikipedia.org/wiki/Graphics_processing_unit) is a specialized electronic circuit designed to rapidly manipulate and alter memory to accelerate the creation of images in a frame buffer intended for output to a display device. 
+- Modern GPUs are very efficient at manipulating computer graphics and image processing. Their **highly parallel structure** makes them more efficient than CPUs for algorithms that process large blocks of data in parallel. 
+- The term was popularized by Nvidia in 1999, who marketed the GeForce 256 as "the world's first GPU".
 
 ---
-# What is GPGPU?
-* **G**eneral **P**urpose computation on **G**raphics **P**rocessing **U**nits.
+# The Graphics Pipeline
+![h:500](graphics-pipeline-1.png)
 
 ---
-# What is GPGPU?
-- API
-  - **CUDA** - a parallel computing platform and API model created by **Nvidia**. _Nvidia GPU only_.
-  - OpenGL/DirectX/Vulkan **Compute Shader**.
-  - **OpenCL** - a framework for writing programs that execute across heterogeneous platforms (CPUs, GPUs, DSPs, ...).
-  - **Metal** - a low-level, low-overhead hardware-accelerated 3D graphic and compute shader API created by **Apple**.
-  - ...
+# Vertex processing
+![h:500](graphics-pipeline-2.png)
 
 ---
-# Understanding GPU
-- **From a software perspective:**
-  - OpenCL have a good abstraction layer.
-- **From a hardware perspective:**
-  - Closer look at real GPU designs.
+# Primitive processing
+![h:500](graphics-pipeline-3.png)
+
+---
+# Rasterization
+![h:500](graphics-pipeline-4.png)
+
+---
+# Fragment processing
+![h:500](graphics-pipeline-5.png)
+
+---
+# Pixel operations
+![h:500](graphics-pipeline-6.png)
+
+---
+# Programmable Graphics Pipeline
+![h:500](graphics-pipeline-7.png)
+
+---
+# Shader Program Architecture
+![h:450](shader-1.png)
+
+---
+# Simple OpenGL Vertex Shader
+![h:450](shader-2.png)
+
+---
+# Simple OpenGL Fragment Shader
+![h:500](shader-3.png)
+
+---
+# What's in a GPU?
+![h:500](graphics-pipeline-8.png)
+
+---
+# GPU Computing?
+- Beyond basic graphics
+  - Collision detection
+  - Fluid and cloth
+  - Ray tracing
+- Beyond graphics
+  - Protein folding
+  - Speech recognition
+  - Fourier transforms
+
+---
+# GPGPU
+- **G**eneral **P**urpose computation on **G**raphics **P**rocessing **U**nits.
+- [Unified shader model](https://en.wikipedia.org/wiki/Unified_shader_model) refers to a form of hardware in a GPU where **all of the shader stages** in the rendering pipeline (geometry, vertex, pixel, etc.) **have the same capabilities**. They can all read textures and buffers, and they use instruction sets that are almost identical.
+
+---
+# GPU Computing APIs
+- **CUDA** - a parallel computing platform and API model created by **Nvidia**. _Nvidia GPU only_.
+- OpenGL/DirectX/Vulkan **Compute Shader**.
+- **OpenCL** - a framework for writing programs that execute across heterogeneous platforms (CPUs, GPUs, DSPs, ...).
+- **Metal** - a low-level, low-overhead hardware-accelerated 3D graphic and compute shader API created by **Apple**.
+
+---
+# GPGPU Programming
+- OpenCL have a good abstraction layer.
+- Use our estimate-pi program as an example.
 
 ---
 # OpenCL Platform Model
