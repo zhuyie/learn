@@ -1,0 +1,3 @@
+[submodule "gpgpu/estimate-pi"]
+	path = gpgpu/estimate-pi
+	url = https://github.com/zhuyie/estimate-pi
