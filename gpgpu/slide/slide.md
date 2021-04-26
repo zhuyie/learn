@@ -25,14 +25,14 @@ zhuyie@gmail.com
 ---
 <!-- paginate: true -->
 # Estimate pi using Monte Carlo
-* A simple way to estimate the value of pi is from **the area ratio** between a unit quarter-circle and the enclosing unit square. 
+- A simple way to estimate the value of pi is from **the area ratio** between a unit quarter-circle and the enclosing unit square. 
 ![h:250](pi-1.png)![h:60](pi-2.png)
 
 ---
 # Estimate pi using Monte Carlo
-* We can simply select a **large** number of **uniformly distributed** points within the square. The fraction of points **inside** to the **total** number of points is identical to the area ratio between the quarter-circle and the square.
+- We can simply select a **large** number of **uniformly distributed** points within the square. The fraction of points **inside** to the **total** number of points is identical to the area ratio between the quarter-circle and the square.
 ![h:200](pi-3.png)
-* For each point, we determine if it is **in** the circle, x^2 + y^2 <= a^2.
+- For each point, we determine if it is **in** the circle, x^2 + y^2 <= a^2.
 
 ---
 # Estimate pi using Monte Carlo
@@ -218,3 +218,43 @@ zhuyie@gmail.com
 ---
 # Demo - Output
 ![h:500](demo-10.png)
+
+---
+# Latency and Throughput
+* **Latency** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
+* **Throughput** is the amount of work done in a given amount of time.
+* **CPUs** are **low latency low throughput** processors.
+* **GPUs** are **high latency high throughput** processors.
+
+---
+# Latency and Throughput
+* CPUs are designed to **minimize latency**.
+  - Example: Mouse or keyboard input.
+* CPUs are designed to **maximize single thread performance**.
+  - Large caches.
+  - Superscalar (execute more than one instruction during a clock cycle).
+  - Out-of-order execution.
+  - Branch prediction.
+
+---
+# Latency and Throughput
+* GPUs are designed for tasks that can **tolerate latency**.
+  - Example: Graphics in a game (simplified scenario):
+  ![h:200](latency-1.png)
+* GPUs are designed for tasks that need high throughput, i.e. processing **millions of** pixels in a single frame.
+
+---
+# CPU vs GPU Transistor Allocation
+* GPUs can have more ALUs for the same sized chip and therefore run many more threads of computation.
+![h:250](transistor-allocation.png)
+* Modern GPUs run 10,000s of threads concurrently.
+
+---
+# CPU die
+- Intel Skylake quad-core (14 nm, ~122.3 mm²)
+![h:400](die-cpu-1.png) ![h:200](die-cpu-2.png)
+
+---
+# GPU die
+- NVIDIA GeForce GTX 1080 (16 nm, ~314 mm²)
+![h:450](die-gpu-1.jpeg) ![h:450](die-gpu-2.png)
