@@ -110,7 +110,8 @@ zhuyie@gmail.com
 ---
 # GPGPU
 - **G**eneral **P**urpose computation on **G**raphics **P**rocessing **U**nits.
-- [Unified shader model](https://en.wikipedia.org/wiki/Unified_shader_model) refers to a form of hardware in a GPU where **all of the shader stages** in the rendering pipeline (geometry, vertex, pixel, etc.) **have the same capabilities**. They can all read textures and buffers, and they use instruction sets that are almost identical.
+- [Unified shader model](https://en.wikipedia.org/wiki/Unified_shader_model) refers to a form of hardware in a GPU where **all of the shader stages** in the rendering pipeline (vertex, geometry, pixel, etc.) **have the same capabilities**. They can all read textures and buffers, and they use instruction sets that are almost identical.
+- They can do **generic computing** as well.
 
 ---
 # GPU Computing APIs
@@ -221,16 +222,16 @@ zhuyie@gmail.com
 
 ---
 # Latency and Throughput
-* **Latency** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
-* **Throughput** is the amount of work done in a given amount of time.
-* **CPUs** are **low latency low throughput** processors.
-* **GPUs** are **high latency high throughput** processors.
+- **Latency** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
+- **Throughput** is the amount of work done in a given amount of time.
+- **CPUs** are **low latency low throughput** processors.
+- **GPUs** are **high latency high throughput** processors.
 
 ---
 # Latency and Throughput
-* CPUs are designed to **minimize latency**.
+- CPUs are designed to **minimize latency**.
   - Example: Mouse or keyboard input.
-* CPUs are designed to **maximize single thread performance**.
+- CPUs are designed to **maximize single thread performance**:
   - Large caches.
   - Superscalar (execute more than one instruction during a clock cycle).
   - Out-of-order execution.
@@ -238,16 +239,16 @@ zhuyie@gmail.com
 
 ---
 # Latency and Throughput
-* GPUs are designed for tasks that can **tolerate latency**.
+- GPUs are designed for tasks that can **tolerate latency**.
   - Example: Graphics in a game (simplified scenario):
   ![h:200](latency-1.png)
-* GPUs are designed for tasks that need high throughput, i.e. processing **millions of** pixels in a single frame.
+- GPUs are designed for tasks that need high throughput, i.e. processing **millions of** pixels in a single frame.
 
 ---
 # CPU vs GPU Transistor Allocation
-* GPUs can have more ALUs for the same sized chip and therefore run many more threads of computation.
+- GPUs can have more ALUs for the same sized chip and therefore run many more threads of computation.
 ![h:250](transistor-allocation.png)
-* Modern GPUs run 10,000s of threads concurrently.
+- Modern GPUs run 10,000s of threads concurrently.
 
 ---
 # CPU die
@@ -258,3 +259,12 @@ zhuyie@gmail.com
 # GPU die
 - NVIDIA GeForce GTX 1080 (16 nm, ~314 mm²)
 ![h:450](die-gpu-1.jpeg) ![h:450](die-gpu-2.png)
+
+---
+# Theoretical peak FLOPS
+- Intel Core i7-6700 (Skylake quad-core)
+![h:200](peak-flops-1.png)
+- NVIDIA GeForce GTX 1080
+![h:200](peak-flops-2.png)
+
+---
