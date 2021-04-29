@@ -183,7 +183,7 @@ zhuyie@gmail.com
 - **Constant** – read-only by work-items; read and write by host.
 - **Local** – used for data sharing; read/write by work-items in same work-group.
 - **Private** – only accessible to one work-item.
-- Memory management is explicit:
+- Memory management is **explicit**:
   - Must move data from host to global to local and back.
 
 ---
@@ -222,16 +222,16 @@ zhuyie@gmail.com
 
 ---
 # Latency and Throughput
-- **Latency** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
-- **Throughput** is the amount of work done in a given amount of time.
-- **CPUs** are **low latency low throughput** processors.
-- **GPUs** are **high latency high throughput** processors.
+- ***Latency*** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
+- ***Throughput*** is the amount of work done in a given amount of time.
+- ***CPUs*** are ***low latency low throughput*** processors.
+- ***GPUs*** are ***high latency high throughput*** processors.
 
 ---
 # Latency and Throughput
-- CPUs are designed to **minimize latency**.
+- CPUs are designed to ***minimize latency***.
   - Example: Mouse or keyboard input.
-- CPUs are designed to **maximize single thread performance**:
+- CPUs are designed to ***maximize single thread performance***:
   - Large caches.
   - Superscalar (execute more than one instruction during a clock cycle).
   - Out-of-order execution.
@@ -239,10 +239,10 @@ zhuyie@gmail.com
 
 ---
 # Latency and Throughput
-- GPUs are designed for tasks that can **tolerate latency**.
+- GPUs are designed for tasks that can ***tolerate latency***.
   - Example: Graphics in a game (simplified scenario):
   ![h:200](latency-1.png)
-- GPUs are designed for tasks that need high throughput, i.e. processing **millions of** pixels in a single frame.
+- GPUs are designed for tasks that need high throughput, i.e. processing ***millions of*** pixels in a single frame.
 
 ---
 # CPU vs GPU Transistor Allocation
@@ -268,3 +268,127 @@ zhuyie@gmail.com
 ![h:200](peak-flops-2.png)
 
 ---
+# Managing Threads On A GPU
+- CPU threads:
+  - 10s of relatively ***heavyweight*** threads run on 10s of cores.
+  - Thread programmed and created ***explicitly***.
+  - Thread have relatively ***long*** life-cycle.
+  - Context switching is ***costly***. 
+- How do we:
+  - Dispatch, schedule, and context switch 10,000s of threads?
+  - Program 10,000s of threads?
+
+---
+# A diffuse reflectance shader
+![h:500](diffuse-shader-1.png)
+
+---
+# Execute shader
+![h:450](diffuse-shader-2.png)
+
+---
+# "CPU-style" cores
+![h:450](gpu-evo-1.png)
+
+---
+# Slimming down
+![h:450](gpu-evo-2.png)
+
+---
+# Two cores
+![h:450](gpu-evo-3.png)
+
+---
+# Four cores
+![h:450](gpu-evo-4.png)
+
+---
+# Sixteen cores
+![h:450](gpu-evo-5.png)
+
+---
+# Instruction stream sharing
+![h:450](gpu-evo-6.png)
+
+---
+# SIMD processing
+![h:450](gpu-evo-7.png)
+
+---
+# Modifying the shader
+![h:450](gpu-evo-8.png)
+
+---
+# Modifying the shader
+![h:480](gpu-evo-9.png)
+
+---
+# 128 fragments in parallel
+![h:500](gpu-evo-10.png)
+
+---
+# 128 [*] in parallel
+![h:480](gpu-evo-11.png)
+
+---
+# SIMD processing
+- SIMD processing does not imply SIMD instructions.
+  - Option 1: explicit vector instructions
+    - x86 SSE, AVX
+  - Option 2: scalar instructions, ***implicit HW vectorization***
+    - NVIDIA GeForce (SIMT ***“warps”***), ATI Radeon architectures (***“wavefronts”***)
+    - In practice: 32 to 64 fragments (threads) share an instruction stream.
+
+---
+# But what about branches?
+![h:480](gpu-evo-12.png)
+
+---
+# But what about branches?
+![h:500](gpu-evo-13.png)
+
+---
+# Stalls!
+- Stalls occur when a core cannot run the next instruction because of a dependency on a previous operation.
+- Texture access latency = 100’s to 1000’s of cycles.
+- We’ve removed the fancy caches and logic that helps avoid stalls.
+
+---
+# Stalls!
+![h:300](gpu-evo-14.png)
+
+---
+# Hiding shader stalls
+![h:450](gpu-evo-15.png)
+
+---
+# Hiding shader stalls
+![h:450](gpu-evo-16.png)
+
+---
+# Hiding shader stalls
+![h:450](gpu-evo-17.png)
+
+---
+# Throughput!
+![h:500](gpu-evo-18.png)
+
+---
+# Fast context switching
+- A large register file which can store large # of contexts.
+![h:300](gpu-evo-19.png)
+- All "stalled" threads still resident in GPU.
+- "zero-overhead" context switching.
+
+---
+# Example chip
+![h:480](gpu-evo-20.png)
+
+---
+# Summary: three key ideas
+1. Use many ***“slimmed down cores”*** to run in parallel.
+2. Pack cores ***full of ALUs*** (by sharing instruction stream across groups of fragments)
+   - Option 1: Explicit SIMD vector instructions.
+   - Option 2: Implicit sharing managed by hardware.
+3. Avoid latency stalls by ***interleaving execution*** of many groups of fragments.
+   - When one group stalls, work on another group.
