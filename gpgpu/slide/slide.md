@@ -392,3 +392,49 @@ zhuyie@gmail.com
    - Option 2: Implicit sharing managed by hardware.
 3. Avoid latency stalls by ***interleaving execution*** of many groups of fragments.
    - When one group stalls, work on another group.
+
+---
+# NVIDIA GP104 GPU
+- Based on NVIDIA Pascal GPU architecture.
+- Released on May 27th, 2016.
+- The first graphics card to ship with the GP104 GPU is the GeForce GTX® 1080.
+- https://international.download.nvidia.cn/geforce-com/international/pdfs/GeForce_GTX_1080_Whitepaper_FINAL.pdf
+
+---
+# NVIDIA GP104 GPU
+![h:500](die-gpu-2.png)
+
+---
+# NVIDIA GP104 GPU
+- **G**raphics **P**rocessor **C**lusters, **S**tream **M**ultiprocessor.
+- 4 GPCs, 5 SMs per GPC.
+- Each SM:
+  - 128 CUDA cores
+  - 256 KB of register file
+  - 96 KB shared memory
+- 128 x 20 = 2560 CUDA cores
+- 256 KB x 20 = 5120 KB register file
+
+---
+# NVIDIA GP104 GPU
+![h:500](gp104-sm.png)
+
+---
+# NVIDIA GP104 GPU
+- Each CUDA Core has a fully pipelined integer arithmetic logic unit (ALU) and floating point unit (FPU).
+![h:150](gp104-sm-core.png)
+- LD/ST: supporting units load and store the data at each address to cache or DRAM.
+- SFU: execute transcendental instructions such as sin, cosine,
+reciprocal, and square root.
+
+---
+# NVIDIA GP104 GPU
+- https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities
+- Warp size: 32
+- Maximum # of resident warps per SM: 64
+- Maximum # of ***resident*** threads: 64 x 32 x 20 = 40960
+- Maximum # of ***active*** threads: 2560
+
+---
+<!-- _class: lead -->
+# Thanks
