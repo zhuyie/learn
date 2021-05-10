@@ -222,16 +222,16 @@ zhuyie@gmail.com
 
 ---
 # Latency and Throughput
-- ***Latency*** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
-- ***Throughput*** is the amount of work done in a given amount of time.
-- ***CPUs*** are ***low latency low throughput*** processors.
-- ***GPUs*** are ***high latency high throughput*** processors.
+- **Latency** is a time delay between the moment something is initiated, and the moment one of its effects begins or becomes detectable.
+- **Throughput** is the amount of work done in a given amount of time.
+- **CPUs** are **low latency low throughput** processors.
+- **GPUs** are **high latency high throughput** processors.
 
 ---
 # Latency and Throughput
-- CPUs are designed to ***minimize latency***.
+- CPUs are designed to **minimize latency**.
   - Example: Mouse or keyboard input.
-- CPUs are designed to ***maximize single thread performance***:
+- CPUs are designed to **maximize single thread performance**:
   - Large caches.
   - Superscalar (execute more than one instruction during a clock cycle).
   - Out-of-order execution.
@@ -239,10 +239,10 @@ zhuyie@gmail.com
 
 ---
 # Latency and Throughput
-- GPUs are designed for tasks that can ***tolerate latency***.
+- GPUs are designed for tasks that can **tolerate latency**.
   - Example: Graphics in a game (simplified scenario):
   ![h:200](latency-1.png)
-- GPUs are designed for tasks that need high throughput, i.e. processing ***millions of*** pixels in a single frame.
+- GPUs are designed for tasks that need high throughput, i.e. processing **millions of** pixels in a single frame.
 
 ---
 # CPU vs GPU Transistor Allocation
@@ -270,10 +270,10 @@ zhuyie@gmail.com
 ---
 # Managing Threads On A GPU
 - CPU threads:
-  - 10s of relatively ***heavyweight*** threads run on 10s of cores.
-  - Thread programmed and created ***explicitly***.
-  - Thread have relatively ***long*** life-cycle.
-  - Context switching is ***costly***. 
+  - 10s of relatively **heavyweight** threads run on 10s of cores.
+  - Thread programmed and created **explicitly**.
+  - Thread have relatively **long** life-cycle.
+  - Context switching is **costly**. 
 - How do we:
   - Dispatch, schedule, and context switch 10,000s of threads?
   - Program 10,000s of threads?
@@ -335,8 +335,8 @@ zhuyie@gmail.com
 - SIMD processing does not imply SIMD instructions.
   - Option 1: explicit vector instructions
     - x86 SSE, AVX
-  - Option 2: scalar instructions, ***implicit HW vectorization***
-    - NVIDIA GeForce (SIMT ***“warps”***), ATI Radeon architectures (***“wavefronts”***)
+  - Option 2: scalar instructions, **implicit HW vectorization**
+    - NVIDIA GeForce (SIMT **“warps”**), ATI Radeon architectures (**“wavefronts”**)
     - In practice: 32 to 64 fragments (threads) share an instruction stream.
 
 ---
@@ -349,7 +349,9 @@ zhuyie@gmail.com
 
 ---
 # Stalls!
-- Stalls occur when a core cannot run the next instruction because of a dependency on a previous operation.
+- Stalls occur when a core cannot run the next instruction:
+  - There is a dependency on a previous operation.
+  - The compute resources required by the instruction are not yet available.
 - Texture access latency = 100’s to 1000’s of cycles.
 - We’ve removed the fancy caches and logic that helps avoid stalls.
 
@@ -386,11 +388,11 @@ zhuyie@gmail.com
 
 ---
 # Summary: three key ideas
-1. Use many ***“slimmed down cores”*** to run in parallel.
-2. Pack cores ***full of ALUs*** (by sharing instruction stream across groups of fragments)
+1. Use many **“slimmed down cores”** to run in parallel.
+2. Pack cores **full of ALUs** (by sharing instruction stream across groups of fragments)
    - Option 1: Explicit SIMD vector instructions.
    - Option 2: Implicit sharing managed by hardware.
-3. Avoid latency stalls by ***interleaving execution*** of many groups of fragments.
+3. Avoid latency stalls by **interleaving execution** of many groups of fragments.
    - When one group stalls, work on another group.
 
 ---
@@ -432,8 +434,8 @@ reciprocal, and square root.
 - https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities
 - Warp size: 32
 - Maximum # of resident warps per SM: 64
-- Maximum # of ***resident*** threads: 64 x 32 x 20 = 40960
-- Maximum # of ***active*** threads: 2560
+- Maximum # of **resident** threads: 64 x 32 x 20 = 40960
+- Maximum # of **executing** threads: 2560
 
 ---
 <!-- _class: lead -->
