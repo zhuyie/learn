@@ -438,5 +438,42 @@ reciprocal, and square root.
 - Maximum # of **executing** threads: 2560
 
 ---
+# Back to demo program
+- Why 16 threads gave us 9.87x speed up?
+![h:400](threads-speedup.png)
+
+---
+# Back to demo program
+- Intel Core i9-9980HK: 8 cores, 16 threads
+- Hyper-Threading
+  - Each core contains two logical cores, each of which has its **own** processor architectural state.
+  - The logical cores **share** the execution resources (eg. ALU).
+  - When one thread stalled, switch to another one.
+- The demo program is compute-intensive.
+
+---
+# Back to demo program
+- Why v1 kernel so slow?
+![](opencl-speedup.png)
+- 1 PRNG per GPU thread
+  - v1: mt19937 (state: int[624], ~2500 bytes)
+  - v2: tinymt32j (state: 4 int, 16 bytes)
+
+---
+# Back to demo program
+- GPU Performance Counters (query by [GPA](https://gpuopen.com/gpuperfapi/)):
+![h:450](gpa.png)
+
+---
+# Back to demo program
+- Kernel private variables usually stored in registers.
+- **Register spilling** when:
+  - Hardware limit # registers per thread exceeded.
+  - Arrays declared inside kernels (Registers aren’t indexable).
+- It could hurt performance in two ways:
+  - Increased memory traffic.
+  - Increased instruction count.
+
+---
 <!-- _class: lead -->
 # Thanks
