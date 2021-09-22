@@ -1,7 +1,8 @@
 ---
 marp: true
 theme: gaia
-backgroundColor: #fff
+backgroundColor: #333
+color: #fff
 ---
 <style>
 section {
@@ -18,7 +19,7 @@ zhuyie@gmail.com
 # Agenda
 - Font basics
 - Naïve path renderer
-- Bitmap renderer (texture renderer)
+- Bitmap renderer (raster renderer)
 - Hinting
 - SDF renderer
 - New GPU-based approaches
@@ -27,8 +28,8 @@ zhuyie@gmail.com
 <!-- paginate: true -->
 # Font types
 * A font is a collection of glyphs.
-* **Bitmap** fonts consist of a matrix of dots or pixels representing the image of each glyph in each face and size.
-* **Vector** fonts (outline fonts) use Bézier curves, drawing instructions and mathematical formulae to describe each glyph, which make the character outlines scalable to any size.
+* **Bitmap** fonts consist of a matrix of dots or pixels representing the image of each glyph in each face and **size**.
+* **Vector** fonts (outline fonts) use Bézier curves, drawing instructions and mathematical formulae to describe each glyph, which make the character outlines **scalable** to any size.
   - TrueType uses quadratic bezier curves.
   - OpenType(CFF) uses cubic bezier curves.
 
@@ -145,6 +146,11 @@ NotoSerifSC-Regular.otf
 * In OpenGL(DirectX/Vulkan), the most natural way to represent a glyph pixmap is using **texture**. Build a 2D texture from a pixmap, then do texture sampling in fragment shader.
 * To draw a glyph quad, we can divide the rectangle into two triangles. 
 ```1 texture + 6 vertices (position and corresponding texture coordinate) ==> 1 glyph quad```
+
+---
+# Bitmap renderer
+* A string of text as a textured triangle mesh:
+![h:200](bitmap-renderer-8.png)
 
 ---
 # Bitmap renderer
@@ -315,7 +321,7 @@ C. Loop, J. Blinn, ["Resolution Independent Curve Rendering using Programmable G
 ---
 # Slug Algorithm
 E. Lengyel, ["GPU-Centered Font Rendering Directly from Glyph Outlines"](http://terathon.com/i3d2018_lengyel.pdf)
-![h:400](gpu-renderer-2.png) ![h:400](gpu-renderer-3.png)
+![h:200](gpu-renderer-3.png) ![h:200](gpu-renderer-4.png) ![h:230](gpu-renderer-5.png)
 
 ---
 # Slug Algorithm
