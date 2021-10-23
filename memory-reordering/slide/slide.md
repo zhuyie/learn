@@ -327,11 +327,11 @@ zhuyie@gmail.com
 
 ---
 # BARRIER TYPE = 0
-![h:500](peterson-7.png)
+![w:560](peterson-7.png)
 
 ---
 # BARRIER TYPE = 2
-![h:500](peterson-8.png)
+![w:560](peterson-8.png)
 
 ---
 # Conclusion
