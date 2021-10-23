@@ -138,7 +138,7 @@ zhuyie@gmail.com
 ---
 # Sequential consistency (switch metaphor)
 ![h:250](switch-metaphor.png)
-* All processors issue loads and stores in program order
+* All processors issue loads and stores in program order.
 * Memory chooses a processor, performs a memory operation to completion, then chooses another processor, …
 * The problem with this model is that it’s terribly **slow**.
 
@@ -192,14 +192,14 @@ zhuyie@gmail.com
 * We need a **weaker** memory model.
 
 ---
-# Total store ordering (TSO)
+# Total Store Ordering (TSO)
 * Processor P can read B **before** its write to A is **seen** by all processors.
 * Reads by other processors cannot return new value of A until the write to A is observed by all processors.
 * In TSO, only **W→R order is relaxed**. The W→W constraint still exists. Writes by the same thread are not reordered (they occur in program order)
 * **x86** uses an incompletely specified form of TSO.
 
 ---
-# Total store ordering (TSO)
+# Total Store Ordering (TSO)
 * What is the output? (Initially A = B = 0)
 ![h:120](cpu-reordering-4.png)
 * If there was a simultaneous store-load **reorder**, the program may prints "00".
@@ -242,8 +242,96 @@ zhuyie@gmail.com
 # Example 1: Read two 0s
 
 ---
+# x86 store-load reorder
+* x86 uses an incompletely specified form of TSO.
+* In TSO, the **W→R order is relaxed**.
+* Let's test this example on x86:
+![h:120](cpu-reordering-4.png)
+
+---
+# SOME_BARRIER() and globals
+![h:430](some-barrier.png) ![h:130](two-0s-1.png)
+
+---
+# main(...)
+![h:360](two-0s-2.png)
+
+---
+# main(...) cont.
+![h:540](two-0s-3.png)
+
+---
+# thread1Func(...)
+![h:380](two-0s-4.png)
+
+---
+# thread2Func(...)
+![h:380](two-0s-5.png)
+
+---
+# BARRIER TYPE = 0
+![h:200](two-0s-6.png)
+
+---
+# BARRIER TYPE = 0
+![h:540](two-0s-7.png)
+
+---
+# BARRIER TYPE = 1
+![h:370](two-0s-8.png)
+
+---
+# BARRIER TYPE = 1
+![h:540](two-0s-9.png)
+
+---
+# BARRIER TYPE = 2
+![h:150](two-0s-10.png)
+
+---
+# BARRIER TYPE = 2
+![h:540](two-0s-11.png)
+
+---
 <!-- _class: lead -->
 # Example 2: Peterson lock
+
+---
+# A naïve critical section implemetation
+* To understand how hardware memory reordering can cause real-world bugs, let’s take a look at a C++ implementation of Peterson’s algorithm for two threads.
+* [Peterson's algorithm](https://en.wikipedia.org/wiki/Peterson%27s_algorithm) is a concurrent programming algorithm for **mutual exclusion** that allows two or more processes to share a single-use resource without conflict, using **only** shared memory for communication. It was formulated by Gary L. Peterson in 1981.
+
+---
+# class Peterson
+![w:900](peterson-1.png)
+
+---
+# lock(...)
+![w:900](peterson-2.png)
+
+---
+# unlock(...)
+![w:900](peterson-3.png)
+
+---
+# main(...)
+![w:900](peterson-4.png)
+
+---
+# work(...)
+![w:900](peterson-5.png)
+
+---
+# Output
+![w:900](peterson-6.png)
+
+---
+# BARRIER TYPE = 0
+![h:500](peterson-7.png)
+
+---
+# BARRIER TYPE = 2
+![h:500](peterson-8.png)
 
 ---
 # Conclusion
