@@ -325,16 +325,17 @@ zhuyie@gmail.com
 ---
 # Trojan Source
 * A new type of attack in which **source code** is maliciously encoded so that it appears different to a compiler and to the human eye.
-* Most well-designed programming languages will not allow _arbitrary control characters_ in source code, but they can exist in **comments** and **string literals**.
-* By injecting Unicode **Bidi override** characters into comments and strings, an adversary can produce syntactically-valid source code in most modern languages for which the **display order** of characters presents logic that **diverges from the real logic**.
+* By injecting unicode **Bidi override** characters into **comments** and **string literals**, an adversary can produce syntactically-valid source code for which the **display order** of characters presents logic that **diverges from the real logic**.
+* **Homoglyphs** in function names could be used to deﬁne distinct functions whose names appeared to the human eye to be the same.
 
 ---
 # Trojan Source (cont.)
 * Paper: https://trojansource.codes/trojan-source.pdf
-* Three general types of exploits:
+* Four general types of exploits:
   * Early Returns
   * Commenting-Out
   * Stretched Strings
+  * Homoglyph Attacks
 
 ---
 # Trojan Source (cont. 2)
@@ -347,6 +348,10 @@ zhuyie@gmail.com
 ---
 # Trojan Source (cont. 4)
 ![w:1100](trojan-source-3.png)
+
+---
+# Trojan Source (cont. 5)
+![h:300](trojan-source-4.png)
 
 ---
 # Ideographic Description Sequence
