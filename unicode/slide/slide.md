@@ -323,6 +323,32 @@ zhuyie@gmail.com
 * Use library, e.g. [ICU](http://site.icu-project.org/home), [GNU FriBidi](https://github.com/fribidi/fribidi).
 
 ---
+# Trojan Source
+* A new type of attack in which **source code** is maliciously encoded so that it appears different to a compiler and to the human eye.
+* Most well-designed programming languages will not allow _arbitrary control characters_ in source code, but they can exist in **comments** and **string literals**.
+* By injecting Unicode **Bidi override** characters into comments and strings, an adversary can produce syntactically-valid source code in most modern languages for which the **display order** of characters presents logic that **diverges from the real logic**.
+
+---
+# Trojan Source (cont.)
+* Paper: https://trojansource.codes/trojan-source.pdf
+* Three general types of exploits:
+  * Early Returns
+  * Commenting-Out
+  * Stretched Strings
+
+---
+# Trojan Source (cont. 2)
+![w:1100](trojan-source-1.png)
+
+---
+# Trojan Source (cont. 3)
+![w:1100](trojan-source-2.png)
+
+---
+# Trojan Source (cont. 4)
+![w:1100](trojan-source-3.png)
+
+---
 # Ideographic Description Sequence
 * 表意文字由部首和笔划组成。Unicode定义了一类用来描述部首组合形式的字符(Ideographic Description Char)，例如：⿰, ⿱, ⿴。
 * 基于IDS数据库可以得到某个表意文字的**表意组字序列**。
