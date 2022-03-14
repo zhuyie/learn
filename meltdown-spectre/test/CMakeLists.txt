@@ -7,3 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(
     test-branch-prediction 
     test-branch-prediction.cpp)
+
+add_executable(
+    test-matrix-multiplication
+    test-matrix-multiplication.cpp)

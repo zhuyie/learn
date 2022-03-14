@@ -8,24 +8,8 @@ using namespace std::chrono;
 
 static int dummy[2];
 
-static int64_t matchlen(const char *oldbuf, int64_t oldsize, const char *newbuf, int64_t newsize)
-{
-    int64_t i = 0;
-    int64_t count = (oldsize < newsize) ? oldsize : newsize;
-	for (; i < count; i++) {
-		if (oldbuf[i] != newbuf[i])
-			break;
-	}
-	return i;
-}
-
 int main(int argc, char* argv[])
 {
-    int64_t n = matchlen(argv[0], strlen(argv[0]), "world", 5);
-    if (n == 65535) {
-        return -1;
-    }
-
     // parsing command line
     bool sort = false;
     if (argc > 1 && strcmp(argv[1], "1") == 0) {
@@ -57,20 +41,20 @@ int main(int argc, char* argv[])
         memset(count, 0, sizeof(count));
         for (int i = 0; i < arraySize; ++i) {
             if (data[i] < 128) {
-                dummy[0] *= dummy[1];  // consume-a-few-cycles
+                dummy[0] += dummy[1];  // consume-a-few-cycles
                 count[0]++;            // counting
             } else {
-                dummy[1] *= dummy[0];  // consume-a-few-cycles
+                dummy[1] += dummy[0];  // consume-a-few-cycles
                 count[1]++;            // counting
             }
         }
     }
-    auto duration = duration_cast<microseconds>(system_clock::now() - start);
+    auto elapsedTime = duration_cast<microseconds>(system_clock::now() - start);
     
     fprintf(stdout, "sort  = %d\n", sort ? true : false);
     fprintf(stdout, "total = %d\n", arraySize);
     fprintf(stdout, "count = [%u,%u]\n", count[0], count[1]);
-    fprintf(stdout, "duration = %.2fms\n", duration.count()/1000.0);
+    fprintf(stdout, "time  = %.2fms\n", elapsedTime.count()/1000.0);
 
     return 0;
 }
