@@ -11,3 +11,7 @@ add_executable(
 add_executable(
     test-matrix-multiplication
     test-matrix-multiplication.cpp)
+
+add_executable(
+    cache-timing
+    cache-timing.cpp)
