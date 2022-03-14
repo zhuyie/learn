@@ -1,3 +1,9 @@
 [submodule "gpgpu/estimate-pi"]
 	path = gpgpu/estimate-pi
 	url = https://github.com/zhuyie/estimate-pi
+[submodule "meltdown-spectre/PoCs/meltdown-exploit"]
+	path = meltdown-spectre/PoCs/meltdown-exploit
+	url = https://github.com/paboldin/meltdown-exploit
+[submodule "meltdown-spectre/PoCs/spectre-attack"]
+	path = meltdown-spectre/PoCs/spectre-attack
+	url = https://github.com/Eugnis/spectre-attack
