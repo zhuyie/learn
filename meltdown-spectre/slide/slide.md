@@ -75,7 +75,7 @@ processor from reading sensitive memory **outside of array1**.
 
 ---
 # Spectre V1 wrap-up
-*  Key idea: **mistrains** the CPU's branch predictor, causing the CPU to temporarily **violate program semantics** by executing code that would not have been executed otherwise.
+*  Key ideas: **mistrains** the CPU's branch predictor, causing the CPU to temporarily **violate program semantics** by executing code that would not have been executed otherwise.
 * The unoptimized implementation of the above PoC can read around **10 KB/s** on an i7-4650U with a low (< 0.01%) error rate.
 * Can be **remotely exploited** by code hosted on web pages, for example interpreted languages like **JavaScript**, which run locally using a **web browser**. The scripted malware would then have access to all the memory mapped to the address space of the running browser.
 
@@ -122,7 +122,7 @@ processor from reading sensitive memory **outside of array1**.
 ![w:850](meltdown-poc-7.png)
 
 ---
-# Meltdown Poc
+# Meltdown PoC
 ![w:550](meltdown-poc-8.png)![w:550](meltdown-poc-9.png)
 
 ---
@@ -144,6 +144,12 @@ processor from reading sensitive memory **outside of array1**.
 
 ---
 # Meltdown wrap-up
+* Key ideas: 
+  1. Each process has a single full page table. 
+  2. Vulnerable out-of-order CPUs allow an unprivileged process to load data from a privileged address.
+  3. There is a race condition between raising the exception and a cache attack.
+* The PoC can read **582 KB/s** with a low error rate on i7-8700K.
+* Meltdown **breaks** all security guarantees provided by address space isolation as well as paravirtualized environments.
 
 ---
 # Mitigations
