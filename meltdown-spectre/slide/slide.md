@@ -27,7 +27,8 @@ zhuyie@gmail.com
 - todo
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
+* [Spectre Paper](https://spectreattack.com/spectre.pdf)
 * ![](Conditional_Branch_Example.png)
 * The code fragment begins with a bounds check on x which
 is essential for security. In particular, this check **prevents** the
@@ -36,46 +37,113 @@ processor from reading sensitive memory **outside of array1**.
 * https://github.com/Eugnis/spectre-attack
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:500](spectre-attack.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:450](spectre-attack-1.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:430](spectre-attack-2.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:520](spectre-attack-3.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:520](spectre-attack-4.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:540](spectre-attack-5.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:30](spectre-attack-8.png)
 ![h:300](spectre-attack-6.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:450](spectre-attack-7.png)
 
 ---
-# Spectre Poc
+# Spectre V1 PoC
 ![h:500](spectre-attack.png)
 
 ---
 # Spectre V1 wrap-up
+*  Key idea: **mistrains** the CPU's branch predictor, causing the CPU to temporarily **violate program semantics** by executing code that would not have been executed otherwise.
 * The unoptimized implementation of the above PoC can read around **10 KB/s** on an i7-4650U with a low (< 0.01%) error rate.
-* While Spectre V1 is simpler to exploit with a compiled language such as C or C++ by locally executing machine code, it can also be **remotely exploited** by code hosted on remote malicious web pages, for example interpreted languages like **JavaScript**, which run locally using a **web browser**. The scripted malware would then have access to all the memory mapped to the address space of the running browser.
+* Can be **remotely exploited** by code hosted on web pages, for example interpreted languages like **JavaScript**, which run locally using a **web browser**. The scripted malware would then have access to all the memory mapped to the address space of the running browser.
+
+---
+# Meltdown PoC
+* [Meltdown Paper](https://meltdownattack.com/meltdown.pdf)
+* ![h:70](meltdown-poc-1.png)![h:150](meltdown-poc-2.png)
+* Line 4 reads from a kernel address, the load **succeed internally**, but will raise an exception when this instruction **retired**.
+* Line 5-7 might be executed **before** line 4 retired due to OoO.
+* When line 4 is retired, the **exception** is registered, and the **pipeline** is flushed to eliminate all results of subsequent instructions.
+
+---
+# Meltdown PoC
+* Meltdown consists of 3 steps:
+  1. The content of an attacker-chosen memory location, which is inaccessible to the attacker, is **loaded** into a register.
+  2. A transient instruction **accesses** a cache line based on the secret content of the register.
+  3. The attacker uses **Flush+Reload** to determine the accessed cache line and hence the secret stored at the chosen memory location.
+* https://github.com/paboldin/meltdown-exploit
+
+---
+# Meltdown PoC
+* Dump `linux_proc_banner` from a user-mode application.
+* ![w:800](linux-proc-banner.png)
+* ![w:800](cat-proc-version.png)
+
+---
+# Meltdown PoC
+![w:900](meltdown-poc-3.png)
+
+---
+# Meltdown PoC
+![w:900](meltdown-poc-4.png)
+
+---
+# Meltdown PoC
+![w:900](meltdown-poc-5.png)
+
+---
+# Meltdown PoC
+![w:900](meltdown-poc-6.png)
+
+---
+# Meltdown PoC
+![w:850](meltdown-poc-7.png)
+
+---
+# Meltdown Poc
+![w:550](meltdown-poc-8.png)![w:550](meltdown-poc-9.png)
+
+---
+# Meltdown PoC
+![w:500](meltdown-poc-10.png)![w:500](meltdown-poc-11.png)
+
+---
+# Meltdown PoC
+![h:550](meltdown-poc-12.png) ![](meltdown-poc-2.png)
+
+---
+# Meltdown PoC
+![w:550](meltdown-poc-13.png)
+![w:550](meltdown-poc-14.png)
+
+---
+# Meltdown PoC
+![h:550](meltdown-poc-15.png)![h:200](meltdown-poc-16.png)
+
+---
+# Meltdown wrap-up
 
 ---
 # Mitigations
