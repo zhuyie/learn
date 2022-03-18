@@ -27,6 +27,44 @@ zhuyie@gmail.com
 - todo
 
 ---
+# CPU die
+- Intel Skylake quad-core (14 nm, ~122.3 mm²)
+![h:450](die-cpu-1.png) ![h:250](die-cpu-2.png)
+
+---
+# CPU core block diagram
+![h:550](skylake_block_diagram.png) ![h:550](skylake_block_diagram2.png)
+
+---
+# Caches
+* Why do CPUs need Caches?
+  - [The Gap between Processor and Memory Speeds](http://gec.di.uminho.pt/discip/minf/ac0102/1000gap_proc-mem_speed.pdf)
+* How does CPU Cache work?
+  - SRAM vs. DRAM
+  - 1~10 ns vs. 100+ ns
+  - 32KB~8MB vs. 4GB~32GB
+  - data is transferred between memory and cache in blocks of fixed size, called cache lines.
+  - temporal locality and spatial locality.
+
+---
+# Cache Timing
+![w:350](cache-timing-1.png) ![w:450](cache-timing-2.png)
+![w:450](cache-timing-3.png)
+
+---
+# Performance Impact of Cache
+[The impact of cache locality on performance in C through matrix multiplication](https://levelup.gitconnected.com/c-programming-hacks-4-matrix-multiplication-are-we-doing-it-right-21a9f1cbf53)
+![w:200](cache-performance-impact-1.png) ![w:500](cache-performance-impact-2.png) ![w:450](cache-performance-impact-3.png)
+
+---
+# Performance Impact of Cache
+![h:500](cache-performance-impact-4.png)
+
+---
+# Performance Impact of Cache
+![h:500](cache-performance-impact-5.png)
+
+---
 # Spectre V1 PoC
 * [Spectre Paper](https://spectreattack.com/spectre.pdf)
 * ![](Conditional_Branch_Example.png)
