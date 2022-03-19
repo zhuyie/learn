@@ -65,6 +65,41 @@ zhuyie@gmail.com
 ![h:500](cache-performance-impact-5.png)
 
 ---
+# System Protection
+* User programs typically not trusted
+  * May use unfair amount of resources
+  * May maliciously cause other programs or OS to fail
+* System provides two CPU modes
+  * **User mode**: Some access to hardware resources restricted
+  * **Kernel mode**: Full access to hardware resources
+
+---
+# How CPU Modes are implemented
+* A modern CPU typical provides different **protection rings**, which represent different **privilege levels**.
+* E.g., an x86 CPU usually provides 4 rings, and a Windows OS uses **Ring 0** for the kernel mode and **Ring 3** for the user mode.
+![h:300](priv_rings.svg)
+
+---
+# Kernel Mode vs. User Mode
+* A **fault** in the user space (e.g., divided by zero, invalid access, null pointer dereference) can be captured by the Kernel (without crashing the whole system).
+* **Privileged instructions** can only be issued in the kernel mode.
+  - E.g., disk I/O.
+  - – In x86, an attempt to execute them from ring 3 leads to GP (General Protection) exceptions.
+* The **kernel memory space** can only be accessed in the kernel mode.
+  - E.g., the list of processes for scheduling.
+
+---
+# System Calls
+* If I/O operations rely on privileged instructions, how does a **user program** read/write?
+* **System calls**
+* When a system call is issued, the process goes **from** user mode (Ring 3) **to** kernel mode (Ring 0)
+* **printf** call (Ring 3) => **write** system call => Kernel code (Ring 0)
+
+---
+# System Calls
+![h:500](syscall.png)
+
+---
 # Spectre V1 PoC
 * [Spectre Paper](https://spectreattack.com/spectre.pdf)
 * ![](Conditional_Branch_Example.png)
