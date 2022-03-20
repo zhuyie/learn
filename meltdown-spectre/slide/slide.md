@@ -24,7 +24,44 @@ zhuyie@gmail.com
 ---
 <!-- paginate: true -->
 # Agenda
-- todo
+- Vulnerabilities
+- A brief introduction of CPU architecture
+- Spectre V1 PoC
+- Meltdown PoC
+- Mitigations
+
+---
+# Vulnerabilities
+![w:700](vulnerabilities-1.png) [1]([xxx](https://arstechnica.com/gadgets/2018/01/meltdown-and-spectre-every-modern-processor-has-unfixable-security-flaws/))
+
+![w:800](vulnerabilities-2.png) [2](https://www.theregister.com/2018/01/02/intel_cpu_design_flaw/)
+
+---
+# Vulnerabilities
+![w:900](vulnerabilities-3.png)
+https://www.intel.com/content/www/us/en/architecture-and-technology/side-channel-variants-1-2-3.html
+
+---
+# Meltdown
+* Meltdown exploits **side effects** of **out-of-order** execution on modern processors to **read arbitrary kernel-memory** locations including personal data and passwords.
+* The attack is independent of the operating system, and it does not rely on any software vulnerabilities.
+* Meltdown breaks all **security guarantees** provided by **address space isolation** as well as paravirtualized environments.
+
+---
+# Spectre
+* Spectre is a class of security vulnerabilities that affects modern microprocessors that perform **branch prediction**.
+* Spectre attacks involve inducing a victim to **speculatively** perform operations that **would not occur** during correct program execution and which **leak** the victim’s conﬁdential information via a **side channel** to the adversary.
+* JIT engines used for **JavaScript** were found to be vulnerable. A website can read data stored in the browser for another website, or the browser's memory itself.
+
+---
+# Variants
+![w:900](variants.png)
+
+---
+# What is a side channel?
+From Wikipedia:
+
+“… a side-channel attack is any attack based on **information** gained from the **physical implementation** of a cryptosystem, rather than brute force or theoretical weaknesses in the **algorithms**. For example, **timing information**, power consumption, electromagnetic leaks or even sound can provide an extra source of information, which can be exploited to break the system.”
 
 ---
 # CPU die
@@ -40,11 +77,11 @@ zhuyie@gmail.com
 * Why do CPUs need Caches?
   - [The Gap between Processor and Memory Speeds](http://gec.di.uminho.pt/discip/minf/ac0102/1000gap_proc-mem_speed.pdf)
 * How does CPU Cache work?
-  - SRAM vs. DRAM
+  - **SRAM** vs. DRAM
   - 1~10 ns vs. 100+ ns
-  - 32KB~8MB vs. 4GB~32GB
-  - data is transferred between memory and cache in blocks of fixed size, called cache lines.
-  - temporal locality and spatial locality.
+  - 32KB~8MB vs. 32+ GB
+  - Data is transferred between memory and cache in blocks of fixed size, called **cache lines**.
+  - Temporal **locality** and Spatial locality.
 
 ---
 # Cache Timing
