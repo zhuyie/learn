@@ -31,13 +31,15 @@ zhuyie@gmail.com
 - Mitigations
 
 ---
-# Vulnerabilities
-![w:700](vulnerabilities-1.png) [1]([xxx](https://arstechnica.com/gadgets/2018/01/meltdown-and-spectre-every-modern-processor-has-unfixable-security-flaws/))
+# Catastrophic Vulnerabilities
+![w:650](vulnerabilities-1.png)
 
-![w:800](vulnerabilities-2.png) [2](https://www.theregister.com/2018/01/02/intel_cpu_design_flaw/)
+![w:600](vulnerabilities-2.png) ![w:550](vulnerabilities-4.png)
+
+[1](https://arstechnica.com/gadgets/2018/01/meltdown-and-spectre-every-modern-processor-has-unfixable-security-flaws/) [2](https://www.theregister.com/2018/01/02/intel_cpu_design_flaw/)
 
 ---
-# Vulnerabilities
+# Intel's Response
 ![w:900](vulnerabilities-3.png)
 https://www.intel.com/content/www/us/en/architecture-and-technology/side-channel-variants-1-2-3.html
 
@@ -329,3 +331,4 @@ processor from reading sensitive memory **outside of array1**.
 - https://llvm.org/docs/SpeculativeLoadHardening.html
 - https://www.raspberrypi.com/news/why-raspberry-pi-isnt-vulnerable-to-spectre-or-meltdown/
 - https://hadibrais.wordpress.com/2018/05/14/the-significance-of-the-x86-lfence-instruction/
+- https://www.lighterra.com/papers/modernmicroprocessors/
