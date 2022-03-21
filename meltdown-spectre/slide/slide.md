@@ -105,10 +105,10 @@ From Wikipedia:
 
 ---
 # System Protection
-* User programs typically not trusted
+* User programs typically not trusted:
   * May use unfair amount of resources
   * May maliciously cause other programs or OS to fail
-* System provides two CPU modes
+* System provides two CPU modes:
   * **User mode**: Some access to hardware resources restricted
   * **Kernel mode**: Full access to hardware resources
 
@@ -130,13 +130,79 @@ From Wikipedia:
 ---
 # System Calls
 * If I/O operations rely on privileged instructions, how does a **user program** read/write?
-* **System calls**
-* When a system call is issued, the process goes **from** user mode (Ring 3) **to** kernel mode (Ring 0)
-* **printf** call (Ring 3) => **write** system call => Kernel code (Ring 0)
+* **System calls**.
+* When a system call is issued, the process goes **from** user mode (Ring 3) **to** kernel mode (Ring 0).
+* **printf** call (Ring 3) => **write** system call => Kernel code (Ring 0).
 
 ---
 # System Calls
 ![h:500](syscall.png)
+
+---
+# Virtual Memory
+* Motivation:
+  * Processes would like their memory to be **protected** from access and modification by other processes.
+  * The operating system needs to be **protected** from applications.
+  * By using **swap file** the operating system can use more RAM than it actually has.
+  * **Programmers** would like each process see its own, full, address space.
+
+---
+# Virtual Memory
+* Basic idea:
+  * Each process has its own **Virtual Address Space**, divided into fixed-sized **pages**.
+  * Virtual pages that are in use get **mapped** to pages of physical memory (called page frames).
+    * Virtual memory: pages
+    * Physical memory: frames
+  * Virtual pages not recently used may be stored on **disk**.
+
+---
+# Virtual and Physical Memory
+![w:800](virtual-memory-1.png)
+
+---
+# Sharing Memory using Virtual Aliases
+![w:820](virtual-memory-2.png)
+
+---
+# Virtual Address Space
+![h:330](virtual-address-space.png)
+In 32-bit Windows, the total available virtual address space is 2^32 bytes (4 GB). Usually the lower 2 GB are used for user space, and the upper 2 GB are used for system space.
+
+---
+# How to Finding the Physical Page
+* OS uses some data structures that maps virtual pages to physical page frames: **Page Table** (PT).
+* The OS **updates** the PT with a new mapping whenever it allocates a page frame to a virtual page.
+* PT is accessed on a memory request to translate virtual to physical address → **inefficient!**
+  * Solution: **cache** translations (TLB)
+* One PT per **process**.
+
+---
+# Page Tables and Address Translation
+![w:820](virtual-memory-3.png)
+
+---
+# x86 32-Bit PTE
+![h:400](page-table-entry.png)
+bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by this entry.
+
+---
+# Making Page Tables space-efficient
+* The number of entries in the table is the number of virtual pages:
+  * e.g., 4KB pages
+  * 2^20 entries for a 32b address space → need **4MB/process**.
+  * 2^52 entries for a 64b address space → petabytes per process!
+*  The virtual address space of each process is **sparse** → only a fraction of all virtual addresses actually used.
+* Solutions:
+  * multi-level page table (x86)
+  * inverted page table (PowerPC, UltraSPARC)
+
+---
+# x86 Two-level page table
+![h:500](x86-paging.svg)
+
+---
+# Fast address translation: TLB
+![w:850](tlb.png)
 
 ---
 # Spectre V1 PoC
@@ -332,3 +398,4 @@ processor from reading sensitive memory **outside of array1**.
 - https://www.raspberrypi.com/news/why-raspberry-pi-isnt-vulnerable-to-spectre-or-meltdown/
 - https://hadibrais.wordpress.com/2018/05/14/the-significance-of-the-x86-lfence-instruction/
 - https://www.lighterra.com/papers/modernmicroprocessors/
+- http://www.inf.ed.ac.uk/teaching/courses/car/Notes/2017-18/lecture08-virtual_memory.pdf
