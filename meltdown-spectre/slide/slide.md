@@ -205,6 +205,19 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 ![w:850](tlb.png)
 
 ---
+# Scalar Processor
+* The simplest sort of modern processor executes **one instruction per cycle** (CPI=1); we call this a scalar processor.
+![w:500](scalar-processor-1.png) ![w:500](scalar-processor-2.png)
+* Examples of scalar processors include the Intel 486 and the ARM1176 core used in Raspberry Pi Zero.
+
+---
+# Superscalar Processor
+* Remember the execute stage in particular is really made up of **several** different groups of logic (several sets of gates).
+![w:400](superscalar-processor-1.png)
+* We can duplicating HW for IF/ID/WB, then we can **simultaneously** dispatching multiple instructions to different execution units.
+![w:500](superscalar-processor-2.png)  (CPI=3 ?)
+
+---
 # Spectre V1 PoC
 * [Spectre Paper](https://spectreattack.com/spectre.pdf)
 * ![](Conditional_Branch_Example.png)
