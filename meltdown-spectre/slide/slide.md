@@ -206,7 +206,7 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 
 ---
 # Scalar Processor
-* The simplest sort of modern processor executes **one instruction per cycle** (CPI=1); we call this a scalar processor.
+* The simplest sort of modern processor executes **one instruction per cycle** (IPC=1, or CPI=1); we call this a scalar processor.
 ![w:500](scalar-processor-1.png) ![w:500](scalar-processor-2.png)
 * Examples of scalar processors include the Intel 486 and the ARM1176 core used in Raspberry Pi Zero.
 
@@ -215,7 +215,29 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 * Remember the execute stage in particular is really made up of **several** different groups of logic (several sets of gates).
 ![w:400](superscalar-processor-1.png)
 * We can duplicating HW for IF/ID/WB, then we can **simultaneously** dispatching multiple instructions to different execution units.
-![w:500](superscalar-processor-2.png)  (CPI=3 ?)
+![w:550](superscalar-processor-2.png)  (CPI=0.33 ?)
+
+---
+# Is superscalar good enough?
+* Instructions interact with each other in pipeline:
+![h:50](hazards-1.png) ![h:110](hazards-2.png)
+* May depend on something produced by an earlier instruction:
+  * Dependence may be for a data value: **data hazard**
+  * Dependence may be for the next instruction’s address (branches, exceptions): **control hazard**
+* May need a resource being used by another instruction in the pipeline: **structural hazard**
+
+---
+# Types of Data Hazards
+* Data-dependence
+![w:500](hazards-3.png)
+* Anti-dependence
+![w:500](hazards-4.png)
+* Output-dependence
+![w:500](hazards-5.png)
+
+---
+# Data Flow Analysis
+![w:750](data-flow-analysis.png)
 
 ---
 # Spectre V1 PoC
