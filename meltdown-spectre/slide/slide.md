@@ -240,6 +240,23 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 ![w:750](data-flow-analysis.png)
 
 ---
+# Register Renaming
+* Anti and output dependencies are **not true dependencies**.
+  - The same register refers to values that have nothing to do with each other.
+  - They exist due to lack of register ID’s (i.e. names) in the ISA.
+* The register ID is **renamed** to the **reorder buffer** (ROB) entry that will hold the register’s value.
+* This eliminates anti and output dependencies.
+
+---
+# Speculative Execution
+* Whenever a RaW/branch hazard is encountered, we normally have to stall the pipeline: insert a pipeline bubble (NOPs).
+* Rather than wait for value, can **guess** value!
+  - Those instructions that depend on that value are executing **internally** (their results not architecturally visible). 
+  - If the speculatively used value was **correct**, those instructions are valid and can **retire** (become architecturally visible).
+  - Otherwise, those instructions are invalid and must be squashed.
+  - Following the squash, the processor can resume execution with the correct value.
+
+---
 # Spectre V1 PoC
 * [Spectre Paper](https://spectreattack.com/spectre.pdf)
 * ![](Conditional_Branch_Example.png)
