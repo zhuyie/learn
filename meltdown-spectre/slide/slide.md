@@ -249,12 +249,42 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 
 ---
 # Speculative Execution
-* Whenever a RaW/branch hazard is encountered, we normally have to stall the pipeline: insert a pipeline bubble (NOPs).
+* Whenever a RAW/branch hazard is encountered, we normally have to stall the pipeline: insert a pipeline bubble (NOPs).
 * Rather than wait for value, can **guess** value!
   - Those instructions that depend on that value are executing **internally** (their results not architecturally visible). 
   - If the speculatively used value was **correct**, those instructions are valid and can **retire** (become architecturally visible).
   - Otherwise, those instructions are invalid and must be squashed.
   - Following the squash, the processor can resume execution with the correct value.
+
+---
+# Out of order execution (OoO)
+![w:850](OoO-1.png)
+
+---
+# OoO Pipeline
+![w:850](OoO-2.png)
+
+---
+# Putting it all together
+![h:550](skylake_block_diagram.png) ![h:550](skylake_block_diagram2.png)
+
+---
+# Branch Prediction
+* The Branch Target Buffer (**BTB**) keeps a mapping from addresses of recently executed branch instructions to destination addresses.
+* Branch History Buffer (**BHB**) use the previous branch history as the footprint to improve the accuracy of branch predictions.
+* Bad programming pattern may reduce branch prediction accuracy: [How many "if"s are too many?](https://blog.cloudflare.com/branch-predictor/)
+
+---
+# Branch prediction - irregular data
+![w:750](branch-prediction-1.png)
+
+---
+# Branch prediction - irregular data
+![w:900](branch-prediction-2.png)
+
+---
+# Branch prediction - irregular data
+![w:600](branch-prediction-3.png)
 
 ---
 # Spectre V1 PoC
@@ -447,7 +477,7 @@ processor from reading sensitive memory **outside of array1**.
 # References
 - https://www.moesif.com/blog/technical/cpu-arch/What-Is-The-Actual-Vulnerability-Behind-Meltdown/
 - https://llvm.org/docs/SpeculativeLoadHardening.html
-- https://www.raspberrypi.com/news/why-raspberry-pi-isnt-vulnerable-to-spectre-or-meltdown/
 - https://hadibrais.wordpress.com/2018/05/14/the-significance-of-the-x86-lfence-instruction/
 - https://www.lighterra.com/papers/modernmicroprocessors/
 - http://www.inf.ed.ac.uk/teaching/courses/car/Notes/2017-18/lecture08-virtual_memory.pdf
+- https://iis-people.ee.ethz.ch/~gmichi/asocd/addinfo/Out-of-Order_execution.pdf
