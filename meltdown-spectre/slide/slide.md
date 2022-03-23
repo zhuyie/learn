@@ -275,15 +275,15 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 * Bad programming pattern may reduce branch prediction accuracy: [How many "if"s are too many?](https://blog.cloudflare.com/branch-predictor/)
 
 ---
-# Branch prediction - irregular data
+# Branch Prediction - irregular data
 ![w:750](branch-prediction-1.png)
 
 ---
-# Branch prediction - irregular data
+# Branch Prediction - irregular data
 ![w:900](branch-prediction-2.png)
 
 ---
-# Branch prediction - irregular data
+# Branch Prediction - irregular data
 ![w:600](branch-prediction-3.png)
 
 ---
