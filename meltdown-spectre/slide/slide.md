@@ -87,13 +87,18 @@ From Wikipedia:
 
 ---
 # Cache Timing
-![w:350](cache-timing-1.png) ![w:450](cache-timing-2.png)
-![w:450](cache-timing-3.png)
+![w:580](cache-timing-1.png) ![w:580](cache-timing-2.png)
+![w:400](cache-timing-3.png)
 
 ---
 # Performance Impact of Cache
 [The impact of cache locality on performance in C through matrix multiplication](https://levelup.gitconnected.com/c-programming-hacks-4-matrix-multiplication-are-we-doing-it-right-21a9f1cbf53)
-![w:200](cache-performance-impact-1.png) ![w:500](cache-performance-impact-2.png) ![w:450](cache-performance-impact-3.png)
+
+![w:550](cache-performance-impact-3.png)
+
+---
+# Performance Impact of Cache
+![w:580](cache-performance-impact-1.png) ![w:580](cache-performance-impact-2.png)
 
 ---
 # Performance Impact of Cache
@@ -276,15 +281,11 @@ bit 2: if 0, user-mode accesses are not allowed to the 4KB page referenced by th
 
 ---
 # Branch Prediction - irregular data
-![w:750](branch-prediction-1.png)
+![w:580](branch-prediction-1.png) ![w:580](branch-prediction-2.png)
 
 ---
 # Branch Prediction - irregular data
-![w:900](branch-prediction-2.png)
-
----
-# Branch Prediction - irregular data
-![w:600](branch-prediction-3.png)
+![w:500](branch-prediction-3.png)
 
 ---
 # Spectre V1 PoC
