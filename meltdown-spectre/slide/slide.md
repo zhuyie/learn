@@ -303,32 +303,27 @@ processor from reading sensitive memory **outside of array1**.
 
 ---
 # Spectre V1 PoC
-![h:450](spectre-attack-1.png)
+![w:780](spectre-attack-1.png)
 
 ---
 # Spectre V1 PoC
-![h:430](spectre-attack-2.png)
+![w:780](spectre-attack-2.png)
 
 ---
 # Spectre V1 PoC
-![h:520](spectre-attack-3.png)
+![w:780](spectre-attack-3.png)
 
 ---
 # Spectre V1 PoC
-![h:520](spectre-attack-4.png)
+![w:780](spectre-attack-4.png)
 
 ---
 # Spectre V1 PoC
-![h:540](spectre-attack-5.png)
+![w:780](spectre-attack-5.png)
 
 ---
 # Spectre V1 PoC
-![h:30](spectre-attack-8.png)
-![h:300](spectre-attack-6.png)
-
----
-# Spectre V1 PoC
-![h:450](spectre-attack-7.png)
+![w:780](spectre-attack-6.png)
 
 ---
 # Spectre V1 PoC
@@ -384,11 +379,11 @@ processor from reading sensitive memory **outside of array1**.
 
 ---
 # Meltdown PoC
-![w:550](meltdown-poc-8.png)![w:550](meltdown-poc-9.png)
+![w:580](meltdown-poc-8.png) ![w:580](meltdown-poc-9.png)
 
 ---
 # Meltdown PoC
-![w:500](meltdown-poc-10.png)![w:500](meltdown-poc-11.png)
+![w:500](meltdown-poc-10.png) ![w:500](meltdown-poc-11.png)
 
 ---
 # Meltdown PoC
